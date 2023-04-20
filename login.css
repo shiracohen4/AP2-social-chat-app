@@ -1,0 +1,48 @@
+#logo{
+    margin-top: 20px;
+    width: 300px;
+    height: 300px;
+    margin-left: 800px;
+
+}
+
+#login{    
+    margin-top: 0px;
+    margin-left: 650px;
+    margin-bottom: 100px;
+    margin-right: 650px;    
+}
+
+.card {
+    --bs-card-spacer-y: 10rem;
+    --bs-card-title-spacer-y: 2.5rem;
+    --bs-card-border-color: #ffc107;
+    
+}
+.card-body{
+    padding-top: 40px;
+    padding-bottom: 40px;    
+}   
+.card-header{
+    padding-top: 12px;
+}
+
+#parent { white-space: nowrap; }
+.child { display: inline-block; }
+
+#foo{
+    margin-top: 35px;
+    
+}
+.custom-btn {
+    background-color: #E8A5A4    ; /* replace with your desired color */
+    border-color: #E8A5A4; /* replace with your desired color */
+    color: black;
+    font-family: sans-serif; 
+    --bs-btn-font-size: 1.1rem;
+}  
+
+body{
+    background-image: url('26669.jpg');
+
+}
