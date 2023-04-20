@@ -17,11 +17,12 @@
     --bs-card-spacer-y: 10rem;
     --bs-card-title-spacer-y: 2.5rem;
     --bs-card-border-color: #ffc107;
+    --bs-card-spacer-x: 0rem;
     
 }
 .card-body{
     padding-top: 40px;
-    padding-bottom: 40px;    
+    padding-bottom: 0px;    
 }   
 .card-header{
     padding-top: 12px;
@@ -45,4 +46,25 @@
 body{
     background-image: url('26669.jpg');
 
+}
+
+#content{
+    padding-left: 75px;
+}
+
+#register {
+    margin-left: 160px;
+    margin-top: 0px;
+}
+
+#content h5 {
+    margin-bottom: revert;
+}
+
+.btn.custom-btn{
+    margin-bottom: 25px;
+}
+
+#upload_imj{
+    margin-left: 15px;
 }
