@@ -1,0 +1,73 @@
+body{
+    background-image: url('26669.jpg');
+
+}
+
+.card{
+    float: left;
+    height: 702px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#chatlist{
+    width: 502px;
+    left: 200px;
+}
+
+#chatcontent{
+    width: 987px;
+    height: 702px;
+    left: 199px;
+}
+
+#logo{
+    width: 100px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact{
+    width: 65px;
+    float: left;
+    border-radius: 50%;
+    border: solid 2.5px white;
+}
+
+.contactnameh{
+    float: left;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.card-header{
+    background-color: #e8a5a450;
+}
+
+#addcontact{
+    float: right;
+    margin-top: 12px;
+    background-color: #e8a5a400;
+    border-color: #e8a5a400;
+}
+
+#contactheader{
+    padding-bottom: 11px;
+}
+
+#message{
+    float: left;
+    width: 868px;
+    font-size: 1.3rem;
+}
+
+#sendbutton{
+    float: right;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-top: 2px;
+    margin-right: 3px;
+    --bs-btn-font-size: 1.3rem;
+    --bs-btn-font-weight: 350;
+}

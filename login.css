@@ -5,6 +5,8 @@
     margin-left: auto;
     margin-right: auto;
     display: block;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 #login{    
@@ -41,8 +43,8 @@
     
 }
 .custom-btn {
-    background-color: #E8A5A4    ; /* replace with your desired color */
-    border-color: #E8A5A4; /* replace with your desired color */
+    background-color: #E8A5A4;
+    border-color: #E8A5A4;
     color: black;
     font-family: sans-serif; 
     --bs-btn-font-size: 1.1rem;
