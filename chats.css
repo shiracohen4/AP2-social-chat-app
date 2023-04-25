@@ -1,71 +1,79 @@
-body {
+body{
     background-image: url('26669.jpg');
-
+    
 }
 
-.card {
-    float: left;
+
+.card{
     height: 702px;
     margin-left: auto;
     margin-right: auto;
-
+    display: flex;
+    justify-content: center;
 }
 
-#chatlistCard {
+#chatlistCard{
     width: 502px;
-    left: 200px;
+    left: -35px;
+    margin-left: 260px;
+    margin-right: 0px;
 
 }
 
-#chatcontent {
+#chatcontent{
     width: 987px;
     height: 702px;
-    left: 199px;
+    margin-left: 0px;
+    margin-right: 0px;
+    position: absolute;
+    top: 150;
+    top: 100px;
+    left: 726px;    
 }
 
-#logo {
+#logo{
     width: 100px;
     display: flex;
     margin-left: auto;
     margin-right: auto;
 }
 
-.contact {
+.contact{
     width: 65px;
     float: left;
     border-radius: 50%;
     border: solid 2.5px white;
 }
 
-.contactnameh {
+.contactnameh{
     float: left;
     padding-left: 20px;
     padding-top: 20px;
 }
 
-.card-header {
+.card-header{
     background-color: #e8a5a450;
     border-bottom-width: 8px;
 }
 
-#addcontact {
+#addcontact{
     float: right;
     margin-top: 12px;
     background-color: #e8a5a400;
     border-color: #e8a5a400;
 }
 
-#contactheader {
+#contactheader{
     padding-bottom: 11px;
 }
 
-#message {
+#message{
     float: left;
     width: 868px;
     font-size: 1.3rem;
 }
 
-#sendbutton {
+#sendbutton{
     float: right;
     padding-top: 4px;
     padding-bottom: 4px;
@@ -75,7 +83,7 @@ body {
     --bs-btn-font-weight: 350;
 }
 
-#logout {
+#logout{
     position: absolute;
     top: 0px;
     right: 0px;
@@ -83,7 +91,7 @@ body {
     margin-top: 20px;
 }
 
-.contactList {
+.contactList{
     width: 500px;
     height: 76px;
     list-style-type: none;
@@ -96,26 +104,26 @@ body {
     padding-top: 6px;
 }
 
-#chatList {
+#chatList{
     padding-left: 0px;
     margin-bottom: 0px;
 }
 
-.date {
+.date{
     float: right;
     padding-right: 10px;
     position: relative;
     top: -20px;
 }
 
-.card-body {
+.card-body{
     padding-left: 0px;
     padding-top: 0px;
     padding-right: 0px;
     padding-bottom: 0px;
 }
 
-.lastMsg {
+.lastMsg{
     text-align: left;
     position: relative;
     top: 30px;
@@ -124,72 +132,71 @@ body {
 
 
 
-.contactnameb {
-    padding-top: 0;
+.contactnameb{
+    padding-top:0;
     float: left;
     padding-left: 20px;
 }
 
 .talk-bubble {
-    margin: 40px;
-    display: inline-block;
-    position: relative;
-    width: 200px;
-    height: auto;
-    background-color: orangered;
+	margin: 40px;
+  display: inline-block;
+  position: relative;
+	width: 200px;
+	height: auto;
+	background-color: orangered;
 }
 
-.border {
-    border: 8px solid #666;
+.border{
+  border: 8px solid #666;
+}
+.round{
+  border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+
 }
 
-.round {
-    border-radius: 30px;
-    -webkit-border-radius: 30px;
-    -moz-border-radius: 30px;
-
-}
-
-.talktext {
+.talktext{
     padding: 1em;
-    text-align: left;
+      text-align: left;
     line-height: 1.5em;
-}
+  }
 
-
-.chat {
+  
+  .chat {
     border: solid 1px #EEE;
     display: flex;
     flex-direction: column;
     padding: 15px;
     height: 544px;
-}
-
-.messages {
+  }
+  
+  .messages {
     margin-top: 30px;
     display: flex;
     flex-direction: column;
-}
-
-.message {
+  }
+  
+  .message {
     border-radius: 20px;
     padding: 8px 15px;
     margin-top: 5px;
     margin-bottom: 5px;
     display: inline-block;
-}
-
-.yours {
+  }
+  
+  .yours {
     align-items: flex-start;
-}
-
-.yours .message {
+  }
+  
+  .yours .message {
     margin-right: 25%;
     background-color: #eee;
     position: relative;
-}
-
-.yours .message.last:before {
+  }
+  
+  .yours .message.last:before {
     content: "";
     position: absolute;
     z-index: 0;
@@ -199,9 +206,8 @@ body {
     width: 20px;
     background: #eee;
     border-bottom-right-radius: 15px;
-}
-
-.yours .message.last:after {
+  }
+  .yours .message.last:after {
     content: "";
     position: absolute;
     z-index: 1;
@@ -211,41 +217,53 @@ body {
     height: 20px;
     background: white;
     border-bottom-right-radius: 10px;
-}
-
-.mine {
+  }
+  
+  .mine {
     align-items: flex-end;
-}
-
-.mine .message {
+  }
+  
+  .mine .message {
     color: white;
     margin-left: 25%;
     background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
     background-attachment: fixed;
     position: relative;
-}
+  }
+  .mine .message.last:before {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      bottom: 0;
+      right: -8px;
+      height: 20px;
+      width: 20px;
+      background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
+      background-attachment: fixed;
+      border-bottom-left-radius: 15px;
+  }
 
-.mine .message.last:before {
-    content: "";
-    position: absolute;
-    z-index: 0;
-    bottom: 0;
-    right: -8px;
-    height: 20px;
-    width: 20px;
-    background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
-    background-attachment: fixed;
-    border-bottom-left-radius: 15px;
-}
+  .mine .message.last:after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      bottom: 0;
+      right: -10px;
+      width: 10px;
+      height: 20px;
+      background: white;
+      border-bottom-left-radius: 10px;
+  }
 
-.mine .message.last:after {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    bottom: 0;
-    right: -10px;
-    width: 10px;
-    height: 20px;
-    background: white;
-    border-bottom-left-radius: 10px;
-}
+  .msgTime{
+    font-size: small;
+  }
+
+  .msgTime.yours{
+    text-align: end;
+    
+  }
+
+  .msgTime.mine{
+    text-align: initial;
+  }
