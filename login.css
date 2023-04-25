@@ -2,15 +2,19 @@
     margin-top: 20px;
     width: 300px;
     height: 300px;
-    margin-left: 800px;
-
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 #login{    
     margin-top: 0px;
-    margin-left: 650px;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 100px;
-    margin-right: 650px;    
+    max-width: 650px;
 }
 
 .card {
@@ -22,8 +26,11 @@
 }
 .card-body{
     padding-top: 40px;
-    padding-bottom: 0px;    
+    padding-bottom: 0px;   
 }   
+#reg-card-body{
+    padding-left: 0px;
+}
 .card-header{
     padding-top: 12px;
 }
@@ -36,8 +43,8 @@
     
 }
 .custom-btn {
-    background-color: #E8A5A4    ; /* replace with your desired color */
-    border-color: #E8A5A4; /* replace with your desired color */
+    background-color: #E8A5A4;
+    border-color: #E8A5A4;
     color: black;
     font-family: sans-serif; 
     --bs-btn-font-size: 1.1rem;
@@ -53,7 +60,7 @@ body{
 }
 
 #register {
-    margin-left: 160px;
+    margin-left: 200px;
     margin-top: 0px;
 }
 
