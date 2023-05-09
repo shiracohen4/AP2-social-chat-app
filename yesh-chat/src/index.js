@@ -10,6 +10,14 @@ function App() {
   const handleReg = (data) => {
     localStorage.setItem(data.username, JSON.stringify({password: data.password, displayName: data.displayName, picture:data.picture}));
   };
+  const usernameTaken = (data) => {
+    const userData = JSON.parse(localStorage.getItem(data.username));
+    if(userData){
+      return true;
+    }else{
+      return false;
+    }
+  };
 
   const handleLogin = (data) => {
     const userData = JSON.parse(localStorage.getItem(data.username));
@@ -25,7 +33,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login handleLogin={handleLogin} />} />
-          <Route path="/register" element={<Reg handleReg={handleReg} />} />
+          <Route path="/register" element={<Reg handleReg={handleReg} usernameTaken={usernameTaken} />} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>

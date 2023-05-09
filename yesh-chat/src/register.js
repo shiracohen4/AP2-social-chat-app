@@ -1,7 +1,7 @@
 import './login.css';
 import React, {useState} from 'react';
 
-function Reg({ handleReg }) {
+function Reg({ handleReg , usernameTaken}) {
 
     const [formData, setFormData] = useState({ username: '', password: '', displayName: '' ,picture: null});
 
@@ -22,6 +22,11 @@ function Reg({ handleReg }) {
             passwordInput.value = ""
         }
         else {
+            const alreadyTaken = usernameTaken(formData);
+            if(alreadyTaken){
+                setFormData({ ...formData, "username": "" });
+                alert("user name is already taken!");
+            }else{
             handleReg(formData);
             console.log(formData);//to delete!!!!!!!!!!
             setFormData({ username: '', password: '', displayName: '' ,picture: ''});
@@ -31,6 +36,7 @@ function Reg({ handleReg }) {
             upload_imj.value = "";
             const preview1 = document.getElementById('preview');
             preview1.style.display = "none"
+            }
         }
     }
 
