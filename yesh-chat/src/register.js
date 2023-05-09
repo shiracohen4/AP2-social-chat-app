@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 
 function Reg({ handleReg }) {
 
-    const [formData, setFormData] = useState({ username: '', password: '' });
+    const [formData, setFormData] = useState({ username: '', password: '', displayName: '' ,picture: null});
 
     const validateForm = event => {
         event.preventDefault()
@@ -23,10 +23,14 @@ function Reg({ handleReg }) {
         }
         else {
             handleReg(formData);
-            console.log(formData);
-            setFormData({ username: '', password: '' });
+            console.log(formData);//to delete!!!!!!!!!!
+            setFormData({ username: '', password: '', displayName: '' ,picture: ''});
             var valpswd = document.getElementById('confirmPassword');
             valpswd.value = "";
+            const upload_imj = document.getElementById('upload_imj');
+            upload_imj.value = "";
+            const preview1 = document.getElementById('preview');
+            preview1.style.display = "none"
         }
     }
 
@@ -37,15 +41,17 @@ function Reg({ handleReg }) {
 
     const handlePictureInput = e => {
         const img = e.target.files[0];
-        // setPicture(img);
-        // console.log(picture);
+        var img_copy = img;
+        setFormData({ ...formData, "picture": img });
+
         const reader = new FileReader();
         reader.onload = () => {
             const preview = document.getElementById('preview');
             preview.src = reader.result;
             preview.style.display = "block"
         };
-        reader.readAsDataURL(img);
+        reader.readAsDataURL(img_copy);
+
     };
 
     return (
@@ -59,12 +65,12 @@ function Reg({ handleReg }) {
                     </div>
                     <div className="card-body" id="reg-card-body">
                         <div id="content">
-                            <h5 className="card-text topmargin">Username: <input type="text" name="username" pattern="[a-zA-Z0-9_]{3,}" required value={formData.username} onChange={handleChange}></input></h5>
+                            <h5 className="card-text topmargin">Username: <input type="text" name="username" pattern="[a-zA-Z0-9_]{3,}" value={formData.username} required onChange={handleChange}></input></h5>
                             <span className="input-description">Please enter at least 3 (a-z/A-Z/0-9/_) characters</span>
-                            <h5 className="card-text topmargin">Password: <input type="password" id="password" name="password" pattern="[a-zA-Z0-9]{5,}" required value={formData.password} onChange={handleChange}></input></h5>
+                            <h5 className="card-text topmargin">Password: <input type="password" id="password" name="password" pattern="[a-zA-Z0-9]{5,}" value={formData.password} required onChange={handleChange}></input></h5>
                             <span className="input-description">Please enter at least 5 (a-z/A-Z/0-9) characters</span>
                             <h5 className="card-text topmargin" id="valPassword">Confirm password: <input type="password" id="confirmPassword" name="confirmPassword" pattern="[a-zA-Z0-9]{5,}" title="Please enter at least 5 alphanumeric characters." required></input></h5>
-                            <h5 className="card-text topmargin">Display name: <input type="text" name="displayName" required></input></h5> {/*onChange={handleDisplayNameInput} value={displayName}*/}
+                            <h5 className="card-text topmargin">Display name: <input type="text" name="displayName" value={formData.displayName} onChange={handleChange} required></input></h5>
                             <h5 className="card-text topmargin">Picture: <input type="file" accept="image/*" name="picture" id="upload_imj" onChange={handlePictureInput} required></input></h5> {/*value={picture}*/}
                             <img id="preview" src="#" alt="preview"></img>
                             <button type="submit" id="register" className="btn custom-btn topmargin">Register</button>

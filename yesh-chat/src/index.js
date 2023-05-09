@@ -8,7 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 function App() {
 
   const handleReg = (data) => {
-    localStorage.setItem(data.username, JSON.stringify({password: data.password}));
+    localStorage.setItem(data.username, JSON.stringify({password: data.password, displayName: data.displayName, picture:data.picture}));
   };
 
   const handleLogin = (data) => {
