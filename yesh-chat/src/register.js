@@ -1,18 +1,15 @@
 import './login.css';
 import React, {useState} from 'react';
 
-function Reg({addUser}) {
+function Reg({ handleReg }) {
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [displayName, setDisplayName] = useState('');
-    const [picture, setPicture] = useState('');
+    const [formData, setFormData] = useState({ username: '', password: '' });
 
     const validateForm = event => {
+        event.preventDefault()
         var pswd = document.getElementById("password").value
         var confirmPassword = document.getElementById("confirmPassword").value
         if (pswd !== confirmPassword) {
-            event.preventDefault()
             var spanError = document.getElementById("span-error")
             if (spanError) {
                 spanError.remove()
@@ -25,31 +22,23 @@ function Reg({addUser}) {
             passwordInput.value = ""
         }
         else {
-            const newUser = { username, password, displayName, picture };
-            addUser(newUser);
-            setUsername('');
-            setPassword('');
-            setDisplayName('');
-            setPicture('');
+            handleReg(formData);
+            console.log(formData);
+            setFormData({ username: '', password: '' });
+            var valpswd = document.getElementById('confirmPassword');
+            valpswd.value = "";
         }
     }
 
-    const handleUserNameInput = e => {
-        setUsername(e.target.value);
-    };
-
-    const handlePasswordInput = e => {
-        setPassword(e.target.value);
-    };
-
-    const handleDisplayNameInput = e => {
-        setDisplayName(e.target.value);
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({ ...formData, [name]: value });
     };
 
     const handlePictureInput = e => {
         const img = e.target.files[0];
-        setPicture(img);
-        console.log(picture);
+        // setPicture(img);
+        // console.log(picture);
         const reader = new FileReader();
         reader.onload = () => {
             const preview = document.getElementById('preview');
@@ -58,7 +47,6 @@ function Reg({addUser}) {
         };
         reader.readAsDataURL(img);
     };
-
 
     return (
         <>
@@ -71,12 +59,12 @@ function Reg({addUser}) {
                     </div>
                     <div className="card-body" id="reg-card-body">
                         <div id="content">
-                            <h5 className="card-text topmargin">Username: <input type="text" name="username" pattern="[a-zA-Z0-9_]{3,}" required value={username} onChange={handleUserNameInput}></input></h5>
+                            <h5 className="card-text topmargin">Username: <input type="text" name="username" pattern="[a-zA-Z0-9_]{3,}" required value={formData.username} onChange={handleChange}></input></h5>
                             <span className="input-description">Please enter at least 3 (a-z/A-Z/0-9/_) characters</span>
-                            <h5 className="card-text topmargin">Password: <input type="password" id="password" name="password" pattern="[a-zA-Z0-9]{5,}" required value={password} onChange={handlePasswordInput}></input></h5>
+                            <h5 className="card-text topmargin">Password: <input type="password" id="password" name="password" pattern="[a-zA-Z0-9]{5,}" required value={formData.password} onChange={handleChange}></input></h5>
                             <span className="input-description">Please enter at least 5 (a-z/A-Z/0-9) characters</span>
                             <h5 className="card-text topmargin" id="valPassword">Confirm password: <input type="password" id="confirmPassword" name="confirmPassword" pattern="[a-zA-Z0-9]{5,}" title="Please enter at least 5 alphanumeric characters." required></input></h5>
-                            <h5 className="card-text topmargin">Display name: <input type="text" name="displayName" required value={displayName} onChange={handleDisplayNameInput}></input></h5>
+                            <h5 className="card-text topmargin">Display name: <input type="text" name="displayName" required></input></h5> {/*onChange={handleDisplayNameInput} value={displayName}*/}
                             <h5 className="card-text topmargin">Picture: <input type="file" accept="image/*" name="picture" id="upload_imj" onChange={handlePictureInput} required></input></h5> {/*value={picture}*/}
                             <img id="preview" src="#" alt="preview"></img>
                             <button type="submit" id="register" className="btn custom-btn topmargin">Register</button>

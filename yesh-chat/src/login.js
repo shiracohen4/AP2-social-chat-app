@@ -1,31 +1,34 @@
 import './login.css';
+import React, { useState } from 'react';
 
-function Login({ users }) {
-  const handleLogin = (event) => {
+function Login({ handleLogin }) {
+
+  const [formData, setFormData] = useState({ username: '', password: '' });
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const username = event.target.elements.username.value;
-    const password = event.target.elements.password.value;
-    const user = users.find((u) => u.username === username && u.password === password);
-    if (user) {
-      alert("logged in succesfully!")
-    } else {
-      alert("Wrong username or password")
-    }
+    handleLogin(formData);
+    setFormData({ username: '', password: '' });
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
     <>
       <img id="logo" src="logo.png" alt="logo"></img>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSubmit}>
         <div className="card text-center border-dark" id="login">
           <div className="card-header">
             <h5>Login</h5>
           </div>
           <div className="card-body">
             <div>
-              <h5 className="card-title">Username: <input type="text" name="username" /></h5>
+              <h5 className="card-title">Username: <input type="text" name="username" value={formData.username} onChange={handleChange}/></h5>
             </div>
-            <h5 className="card-text">Password: <input type="password" name="password" /></h5>
+            <h5 className="card-text">Password: <input type="password" name="password" value={formData.password} onChange={handleChange}/></h5>
             <button type="submit" className="btn custom-btn">Log-in</button>
           </div>
           <div className="card-footer text-body-secondary">
