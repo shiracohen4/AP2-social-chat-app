@@ -1,9 +1,9 @@
 import './login.css';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-function Reg({ handleReg , usernameTaken}) {
+function Reg({ handleReg, usernameTaken }) {
 
-    const [formData, setFormData] = useState({ username: '', password: '', displayName: '' ,picture: null});
+    const [formData, setFormData] = useState({ username: '', password: '', displayName: '', picture: null });
 
     const validateForm = event => {
         event.preventDefault()
@@ -23,19 +23,23 @@ function Reg({ handleReg , usernameTaken}) {
         }
         else {
             const alreadyTaken = usernameTaken(formData);
-            if(alreadyTaken){
+            if (alreadyTaken) {
                 setFormData({ ...formData, "username": "" });
                 alert("user name is already taken!");
-            }else{
-            handleReg(formData);
-            console.log(formData);//to delete!!!!!!!!!!
-            setFormData({ username: '', password: '', displayName: '' ,picture: ''});
-            var valpswd = document.getElementById('confirmPassword');
-            valpswd.value = "";
-            const upload_imj = document.getElementById('upload_imj');
-            upload_imj.value = "";
-            const preview1 = document.getElementById('preview');
-            preview1.style.display = "none"
+            }
+            else {
+                handleReg(formData);
+                console.log(formData);//to delete!!!!!!!!!!
+                setFormData({ username: '', password: '', displayName: '', picture: '' });
+                var valpswd = document.getElementById('confirmPassword');
+                valpswd.value = "";
+                const upload_imj = document.getElementById('upload_imj');
+                upload_imj.value = "";
+                const preview1 = document.getElementById('preview');
+                preview1.style.display = "none"
+                window.location.href = "/";
+
+
             }
         }
     }
