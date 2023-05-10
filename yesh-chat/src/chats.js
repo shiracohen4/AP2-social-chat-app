@@ -3,11 +3,11 @@ import './chats.css';
 function Chats() {
     return (
         <>
-            <img id="logo" src="YESH-CHATcropped.png"></img>
+            <img id="logo" src="YESH-CHATcropped.png" alt="logo"></img>
             <button type="button" className="btn btn-danger" id="logout">Logout</button>
             <div className="card text-center border-dark" id="chatlistCard">
                 <div className="card-header" id="contactheader">
-                    <img className="contact" src="bella.jpg"></img>
+                    <img className="contact" src="bella.jpg" alt="bella"></img>
                     <h5 className="contactnameh">Bella</h5>
                     <button id="addcontact" className="btn custom-btn" data-bs-toggle="modal" data-bs-target="#newContactModal"
                         z-index="1">
@@ -24,13 +24,13 @@ function Chats() {
                 <div className="card-body">
                     <ul id="chatList">
                         <li className="contactList">
-                            <img className="contact" src="chica.jpg"></img>
+                            <img className="contact" src="chica.jpg" alt ="chica"></img>
                             <h5 className="contactnameb">Chica</h5>
                             <div className="lastMsg">woof-woof</div>
                             <h10 className="date">3/31/2023, 15:24</h10>
                         </li>
                         <li className="contactList">
-                            <img className="contact" src="lichy.jpg"></img>
+                            <img className="contact" src="lichy.jpg" alt="lichy"></img>
                             <h5 className="contactnameb">Lichy</h5>
                             <div className="lastMsg">waf-waf</div>
                             <h10 className="date">3/31/2023, 15:21</h10>
@@ -40,7 +40,7 @@ function Chats() {
             </div>
             <div className="card text-center border-dark" id="chatcontent">
                 <div className="card-header">
-                    <img className="contact" src="chica.jpg"></img>
+                    <img className="contact" src="chica.jpg" alt="chica"></img>
                     <h5 className="contactnameh">Chica</h5>
                 </div>
                 <div className="card-body">
