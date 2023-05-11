@@ -1,40 +1,61 @@
-import React from 'react';
-import './index.css';
-import Login from './login';
-import Reg from './register.js';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import './index.css';
+import { Login, Protected, Chats, Reg } from './components'
 
-export default function App() {
+const App = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(undefined);
+    const [user, setUser] = useState(null);
 
-  const handleReg = (data) => {
-    localStorage.setItem(data.username, JSON.stringify({password: data.password, displayName: data.displayName, picture:data.picture}));
-  };
-  const usernameTaken = (data) => {
-    const userData = JSON.parse(localStorage.getItem(data.username));
-    if(userData){
-      return true;
-    }else{
-      return false;
+    const checkLoggedIn = () => {
+        const user = localStorage.getItem('user');
+        setIsLoggedIn(!!user);
+        setUser(JSON.parse(user));
     }
-  };
+    const handleReg = (data) => {
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        users.push(data)
+        console.log(users);
+        localStorage.setItem('users', JSON.stringify(users));
+    };
+    const handleLogin = (data) => {
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const user = users.find((user) => user.username === data.username)
+        const passwordMatches = user?.password === data.password;
 
-  const handleLogin = (data) => {
-    const userData = JSON.parse(localStorage.getItem(data.username));
-    if (userData && userData.password === data.password) {
-      alert("Logged in succesfully!")
-    } else {
-      alert("Wrong username or password")
+        if (!user || !passwordMatches) { return alert('Wrong username or password') };
+        alert('Logged in successfully!');
+        localStorage.setItem('user', JSON.stringify(user))
+        window.location.href = '/chats';
     }
-  };
+    const usernameTaken = (data) => {
+        const userData = JSON.parse(localStorage.getItem(data.username));
+        if (userData) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-  return (
-    <React.StrictMode>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login handleLogin={handleLogin} />} />
-          <Route path="/register" element={<Reg handleReg={handleReg} usernameTaken={usernameTaken} />} />
-        </Routes>
-      </BrowserRouter>
-    </React.StrictMode>
-  );
+    useEffect(() => {
+        checkLoggedIn()
+    }, [])
+
+    return (
+        <React.StrictMode>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Login isLoggedIn={isLoggedIn} handleLogin={handleLogin} />} />
+                    <Route path="/register" element={<Reg handleReg={handleReg} usernameTaken={usernameTaken} />} />
+                    <Route path='/chats' element={
+                        <Protected isLoggedIn={isLoggedIn}>
+                            <Chats user={user} />
+                        </Protected>
+                    } />
+                </Routes>
+            </BrowserRouter>
+        </React.StrictMode>
+    );
 }
+
+export default App;

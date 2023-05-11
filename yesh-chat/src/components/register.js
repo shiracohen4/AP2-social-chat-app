@@ -1,7 +1,7 @@
-import './login.css';
+import '../styles/login.css';
 import React, { useState } from 'react';
 
-function Reg({ handleReg, usernameTaken }) {
+export const Reg = ({ handleReg, usernameTaken }) => {
 
     const [formData, setFormData] = useState({ username: '', password: '', displayName: '', picture: null });
 
@@ -29,7 +29,6 @@ function Reg({ handleReg, usernameTaken }) {
             }
             else {
                 handleReg(formData);
-                console.log(formData);//to delete!!!!!!!!!!
                 setFormData({ username: '', password: '', displayName: '', picture: '' });
                 var valpswd = document.getElementById('confirmPassword');
                 valpswd.value = "";
@@ -37,9 +36,8 @@ function Reg({ handleReg, usernameTaken }) {
                 upload_imj.value = "";
                 const preview1 = document.getElementById('preview');
                 preview1.style.display = "none"
-                window.location.href = "/";
-
-
+                alert('Register Successful');
+                 window.location.href = "/";
             }
         }
     }
@@ -51,17 +49,17 @@ function Reg({ handleReg, usernameTaken }) {
 
     const handlePictureInput = e => {
         const img = e.target.files[0];
-        var img_copy = img;
+        console.log(img);
         setFormData({ ...formData, "picture": img });
-
+        
         const reader = new FileReader();
-        reader.onload = () => {
+        reader.onloadstart = (event) => {
+            console.log(event);
             const preview = document.getElementById('preview');
-            preview.src = reader.result;
+            preview.src = event.target.result;
             preview.style.display = "block"
         };
-        reader.readAsDataURL(img_copy);
-
+        reader.readAsDataURL(img);
     };
 
     return (
@@ -99,5 +97,3 @@ function Reg({ handleReg, usernameTaken }) {
     );
 
 }
-
-export default Reg;
