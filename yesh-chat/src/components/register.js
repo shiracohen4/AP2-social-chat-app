@@ -37,7 +37,7 @@ export const Reg = ({ handleReg, usernameTaken }) => {
                 const preview1 = document.getElementById('preview');
                 preview1.style.display = "none"
                 alert('Register Successful');
-                 window.location.href = "/";
+                window.location.href = "/";
             }
         }
     }
@@ -49,13 +49,11 @@ export const Reg = ({ handleReg, usernameTaken }) => {
 
     const handlePictureInput = e => {
         const img = e.target.files[0];
-        console.log(img);
-        setFormData({ ...formData, "picture": img });
         
         const reader = new FileReader();
-        reader.onloadstart = (event) => {
-            console.log(event);
+        reader.onloadend = (event) => {
             const preview = document.getElementById('preview');
+            setFormData({ ...formData, "picture": event.target.result });
             preview.src = event.target.result;
             preview.style.display = "block"
         };
@@ -66,7 +64,6 @@ export const Reg = ({ handleReg, usernameTaken }) => {
         <>
             <img id="logo" src="logo.png" alt="logo"></img>
             <form action="./" method="get" onSubmit={validateForm}>
-                {/* will be changed to post later on */}
                 <div className="card border-dark" id="login">
                     <div className="card-header text-center">
                         <h5>register</h5>
@@ -79,7 +76,7 @@ export const Reg = ({ handleReg, usernameTaken }) => {
                             <span className="input-description">Please enter at least 5 (a-z/A-Z/0-9) characters</span>
                             <h5 className="card-text topmargin" id="valPassword">Confirm password: <input type="password" id="confirmPassword" name="confirmPassword" pattern="[a-zA-Z0-9]{5,}" title="Please enter at least 5 alphanumeric characters." required></input></h5>
                             <h5 className="card-text topmargin">Display name: <input type="text" name="displayName" value={formData.displayName} onChange={handleChange} required></input></h5>
-                            <h5 className="card-text topmargin">Picture: <input type="file" accept="image/*" name="picture" id="upload_imj" onChange={handlePictureInput} required></input></h5> {/*value={picture}*/}
+                            <h5 className="card-text topmargin">Picture: <input type="file" accept="image/*" name="picture" id="upload_imj" onChange={handlePictureInput} required></input></h5> 
                             <img id="preview" src="#" alt="preview"></img>
                             <button type="submit" id="register" className="btn custom-btn topmargin">Register</button>
                         </div>

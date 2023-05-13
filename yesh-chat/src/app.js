@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import ReactDOM from 'react-dom/client';
 import './index.css';
 import { Login, Protected, Chats, Reg } from './components'
 
@@ -15,7 +16,6 @@ const App = () => {
     const handleReg = (data) => {
         let users = JSON.parse(localStorage.getItem('users')) || [];
         users.push(data)
-        console.log(users);
         localStorage.setItem('users', JSON.stringify(users));
     };
     const handleLogin = (data) => {
