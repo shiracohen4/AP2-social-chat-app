@@ -13,7 +13,8 @@ export const Chats = ({ user }) => {
         const newContacts = JSON.parse(localStorage.getItem('contacts'))
         setContacts(newContacts)
         if (selectedContact) {
-            const contact = newContacts.find((contact) => contact.name === selectedContact.name)
+            const contact = newContacts.find((contact) => 
+                contact.displayName === selectedContact.displayName)
             setSelectedContact(contact);
         }
     }
@@ -44,6 +45,7 @@ export const Chats = ({ user }) => {
 
     useEffect(() => {
         updateContacts();
+        //eslint-disable-next-line
     }, [])
 
     return (

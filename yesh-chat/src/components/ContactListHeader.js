@@ -10,7 +10,7 @@ const ContactListHeader = ({ user, addNewContact }) => {
     }
 
     return (
-        <div className="card-header" id="contactheader">
+        <div className="card-header" id="userHeader">
             <img className="contact" src={user?.picture} alt=""></img>
             <h5 className="contactnameh">{user?.displayName}</h5>
             <button id="addcontact" className="btn custom-btn" data-bs-toggle="modal" data-bs-target="#newContactModal"

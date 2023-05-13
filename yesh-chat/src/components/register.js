@@ -49,7 +49,11 @@ export const Reg = ({ handleReg, usernameTaken }) => {
 
     const handlePictureInput = e => {
         const img = e.target.files[0];
-        
+        if (img && img.size > 1000000) {
+            alert('img size exceeds the limit of 1MB');
+            e.target.value = null;
+          }
+        else{
         const reader = new FileReader();
         reader.onloadend = (event) => {
             const preview = document.getElementById('preview');
@@ -58,6 +62,7 @@ export const Reg = ({ handleReg, usernameTaken }) => {
             preview.style.display = "block"
         };
         reader.readAsDataURL(img);
+    }
     };
 
     return (
