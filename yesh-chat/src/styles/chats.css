@@ -4,7 +4,7 @@ body{
 }
 
 
-.card{
+.chats .card{
     height: 702px;
     margin-left: auto;
     margin-right: auto;
@@ -12,23 +12,24 @@ body{
     justify-content: center;
 }
 
+.chats {
+    display: flex;
+    max-width: 1500px;
+    margin: auto;
+}
+
 #chatlistCard{
-    width: 502px;
-    left: -35px;
-    margin-left: 260px;
+    margin-left: 0;
+    top: 0;
+    width: 30%;
+    /* left: -35px; */
+    /* margin-left: 260px; */
     margin-right: 0px;
 
 }
 
 #chatcontent{
-    width: 987px;
-    height: 702px;
-    margin-left: 0px;
-    margin-right: 0px;
-    position: absolute;
-    top: 150;
-    top: 100px;
-    left: 726px;    
+    flex: 1;
 }
 
 #logo{
@@ -39,7 +40,7 @@ body{
 }
 
 .contact{
-    width: 65px;
+    width: 65px; height: 65px;
     float: left;
     border-radius: 50%;
     border: solid 2.5px white;
@@ -92,7 +93,6 @@ body{
 }
 
 .contactList{
-    width: 500px;
     height: 76px;
     list-style-type: none;
     border: 1px solid #0000001f;
@@ -116,7 +116,15 @@ body{
     top: -20px;
 }
 
-.card-body{
+#chatlistCard .card-body{
+    overflow: scroll;
+
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+}
+#chatcontent .card-body{
     padding-left: 0px;
     padding-top: 0px;
     padding-right: 0px;
@@ -173,9 +181,12 @@ body{
   }
   
   .messages {
+    width: 100%;
     margin-top: 30px;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
+    /* overflow-y: scroll; */
   }
   
   .message {
@@ -186,17 +197,13 @@ body{
     display: inline-block;
   }
   
-  .yours {
-    align-items: flex-start;
-  }
-  
-  .yours .message {
-    margin-right: 25%;
+  .yours.message {
+    margin-right: auto;
     background-color: #eee;
     position: relative;
   }
   
-  .yours .message.last:before {
+  .yours.message.last:before {
     content: "";
     position: absolute;
     z-index: 0;
@@ -207,7 +214,7 @@ body{
     background: #eee;
     border-bottom-right-radius: 15px;
   }
-  .yours .message.last:after {
+  .yours.message.last:after {
     content: "";
     position: absolute;
     z-index: 1;
@@ -223,14 +230,15 @@ body{
     align-items: flex-end;
   }
   
-  .mine .message {
+  .mine.message {
     color: white;
-    margin-left: 25%;
+    margin-left: auto;
     background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
     background-attachment: fixed;
     position: relative;
+    margin-right: 10px;
   }
-  .mine .message.last:before {
+  .mine.message.last:before {
       content: "";
       position: absolute;
       z-index: 0;
@@ -243,7 +251,7 @@ body{
       border-bottom-left-radius: 15px;
   }
 
-  .mine .message.last:after {
+  .mine.message.last:after {
       content: "";
       position: absolute;
       z-index: 1;
