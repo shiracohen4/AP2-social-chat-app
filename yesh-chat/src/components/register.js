@@ -1,7 +1,7 @@
-import './login.css';
+import '../styles/login.css';
 import React, { useState } from 'react';
 
-function Reg({ handleReg, usernameTaken }) {
+export const Reg = ({ handleReg, usernameTaken }) => {
 
     const [formData, setFormData] = useState({ username: '', password: '', displayName: '', picture: null });
 
@@ -29,7 +29,6 @@ function Reg({ handleReg, usernameTaken }) {
             }
             else {
                 handleReg(formData);
-                console.log(formData);//to delete!!!!!!!!!!
                 setFormData({ username: '', password: '', displayName: '', picture: '' });
                 var valpswd = document.getElementById('confirmPassword');
                 valpswd.value = "";
@@ -37,9 +36,8 @@ function Reg({ handleReg, usernameTaken }) {
                 upload_imj.value = "";
                 const preview1 = document.getElementById('preview');
                 preview1.style.display = "none"
+                alert('Register Successful');
                 window.location.href = "/";
-
-
             }
         }
     }
@@ -51,24 +49,26 @@ function Reg({ handleReg, usernameTaken }) {
 
     const handlePictureInput = e => {
         const img = e.target.files[0];
-        var img_copy = img;
-        setFormData({ ...formData, "picture": img });
-
+        if (img && img.size > 1000000) {
+            alert('img size exceeds the limit of 1MB');
+            e.target.value = null;
+          }
+        else{
         const reader = new FileReader();
-        reader.onload = () => {
+        reader.onloadend = (event) => {
             const preview = document.getElementById('preview');
-            preview.src = reader.result;
+            setFormData({ ...formData, "picture": event.target.result });
+            preview.src = event.target.result;
             preview.style.display = "block"
         };
-        reader.readAsDataURL(img_copy);
-
+        reader.readAsDataURL(img);
+    }
     };
 
     return (
         <>
             <img id="logo" src="logo.png" alt="logo"></img>
             <form action="./" method="get" onSubmit={validateForm}>
-                {/* will be changed to post later on */}
                 <div className="card border-dark" id="login">
                     <div className="card-header text-center">
                         <h5>register</h5>
@@ -81,7 +81,7 @@ function Reg({ handleReg, usernameTaken }) {
                             <span className="input-description">Please enter at least 5 (a-z/A-Z/0-9) characters</span>
                             <h5 className="card-text topmargin" id="valPassword">Confirm password: <input type="password" id="confirmPassword" name="confirmPassword" pattern="[a-zA-Z0-9]{5,}" title="Please enter at least 5 alphanumeric characters." required></input></h5>
                             <h5 className="card-text topmargin">Display name: <input type="text" name="displayName" value={formData.displayName} onChange={handleChange} required></input></h5>
-                            <h5 className="card-text topmargin">Picture: <input type="file" accept="image/*" name="picture" id="upload_imj" onChange={handlePictureInput} required></input></h5> {/*value={picture}*/}
+                            <h5 className="card-text topmargin">Picture: <input type="file" accept="image/*" name="picture" id="upload_imj" onChange={handlePictureInput} required></input></h5> 
                             <img id="preview" src="#" alt="preview"></img>
                             <button type="submit" id="register" className="btn custom-btn topmargin">Register</button>
                         </div>
@@ -99,5 +99,3 @@ function Reg({ handleReg, usernameTaken }) {
     );
 
 }
-
-export default Reg;

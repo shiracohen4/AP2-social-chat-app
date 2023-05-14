@@ -1,7 +1,7 @@
-import './login.css';
-import React, { useState } from 'react';
+import '../styles/login.css';
+import React, { useState, useEffect } from 'react';
 
-function Login({ handleLogin }) {
+export const Login = ({ isLoggedIn, handleLogin }) => {
 
   const [formData, setFormData] = useState({ username: '', password: '' });
 
@@ -15,6 +15,11 @@ function Login({ handleLogin }) {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
+  useEffect(() => {
+    if (isLoggedIn) {
+        window.location.href = "/chats";
+    }
+}, [isLoggedIn]);
 
   return (
     <>
@@ -43,5 +48,3 @@ function Login({ handleLogin }) {
     </>
   );
 }
-
-export default Login;

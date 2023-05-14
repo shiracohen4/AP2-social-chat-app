@@ -24,7 +24,7 @@
     --bs-card-spacer-x: 0rem;
     
 }
-.card-body{
+#login .card-body{
     padding-top: 40px;
     padding-bottom: 0px;   
 }   
@@ -52,7 +52,7 @@
 }  
 
 body{
-    background-image: url('backGround.jpg');
+    background-image: url('../backGround.jpg')
 
 }
 
