@@ -5,9 +5,9 @@ export const Login = ({ isLoggedIn, handleLogin }) => {
 
   const [formData, setFormData] = useState({ username: '', password: '' });
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    handleLogin(formData);
+    await handleLogin(formData);
     setFormData({ username: '', password: '' });
   };
 
@@ -15,6 +15,7 @@ export const Login = ({ isLoggedIn, handleLogin }) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
+  
   useEffect(() => {
     if (isLoggedIn) {
         window.location.href = "/chats";

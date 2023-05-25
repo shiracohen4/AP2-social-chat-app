@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 
 export const Reg = ({ handleReg, usernameTaken }) => {
 
-    const [formData, setFormData] = useState({ username: '', password: '', displayName: '', picture: null });
+    const [formData, setFormData] = useState({ username: '', password: '', displayName: '', profilePic: null });
 
-    const validateForm = event => {
+    const validateForm = async event => {
         event.preventDefault()
         var pswd = document.getElementById("password").value
         var confirmPassword = document.getElementById("confirmPassword").value
@@ -22,14 +22,13 @@ export const Reg = ({ handleReg, usernameTaken }) => {
             passwordInput.value = ""
         }
         else {
-            const alreadyTaken = usernameTaken(formData);
-            if (alreadyTaken) {
+            const isUnique = await handleReg(formData); //add the new user to the users list
+            if (!isUnique) {
                 setFormData({ ...formData, "username": "" });
-                alert("user name is already taken!");
+                alert("username is already taken!");
             }
             else {
-                handleReg(formData);
-                setFormData({ username: '', password: '', displayName: '', picture: '' });
+                setFormData({ username: '', password: '', displayName: '', profilePic: '' });
                 var valpswd = document.getElementById('confirmPassword');
                 valpswd.value = "";
                 const upload_imj = document.getElementById('upload_imj');
@@ -57,7 +56,7 @@ export const Reg = ({ handleReg, usernameTaken }) => {
         const reader = new FileReader();
         reader.onloadend = (event) => {
             const preview = document.getElementById('preview');
-            setFormData({ ...formData, "picture": event.target.result });
+            setFormData({ ...formData, "profilePic": event.target.result });
             preview.src = event.target.result;
             preview.style.display = "block"
         };
@@ -81,7 +80,7 @@ export const Reg = ({ handleReg, usernameTaken }) => {
                             <span className="input-description">Please enter at least 5 (a-z/A-Z/0-9) characters</span>
                             <h5 className="card-text topmargin" id="valPassword">Confirm password: <input type="password" id="confirmPassword" name="confirmPassword" pattern="[a-zA-Z0-9]{5,}" title="Please enter at least 5 alphanumeric characters." required></input></h5>
                             <h5 className="card-text topmargin">Display name: <input type="text" name="displayName" value={formData.displayName} onChange={handleChange} required></input></h5>
-                            <h5 className="card-text topmargin">Picture: <input type="file" accept="image/*" name="picture" id="upload_imj" onChange={handlePictureInput} required></input></h5> 
+                            <h5 className="card-text topmargin">Picture: <input type="file" accept="image/*" name="profilePic" id="upload_imj" onChange={handlePictureInput} required></input></h5> 
                             <img id="preview" src="#" alt="preview"></img>
                             <button type="submit" id="register" className="btn custom-btn topmargin">Register</button>
                         </div>

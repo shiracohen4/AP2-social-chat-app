@@ -37,7 +37,7 @@ export const ChatCard = ({ contact, updateContacts }) => {
         contact ? (
             <>
                 <div className="card-header" id="contactHeader">
-                    <img className="contact" src={contact.picture} alt="chica"></img>
+                    <img className="contact" src={contact.profilePic} alt="chica"></img>
                     <h5 className="contactnameh">{contact.displayName}</h5>
                 </div>
                 <div className="card-body">

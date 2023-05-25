@@ -5,7 +5,7 @@ import ContactList from './ContactList';
 import { ChatCard } from './ChatCard';
 
 
-export const Chats = ({ user }) => {
+export const Chats = ({ user , token}) => {
     const [contacts, setContacts] = useState([])
     const [selectedContact, setSelectedContact] = useState(null)
 
@@ -18,28 +18,30 @@ export const Chats = ({ user }) => {
             setSelectedContact(contact);
         }
     }
-    const addNewContact = async (e, newContact) => {
+
+    const addNewContact = async (e, newContact) => { //make sure this is the username and not the diaplayname
         e.preventDefault();
         const contacts = JSON.parse(localStorage.getItem('contacts')) || [];
         const response = await fetch('https://randomuser.me/api/');
         const data = await response.json()
-        const picture = data.results[0].picture.medium;
+        const profilePic = data.results[0].profilePic.medium;
         const contact = {
             displayName: newContact,
             messages: [],
-            picture
+            profilePic // --> picture : picture
         }
 
         contacts.push(contact);
         localStorage.setItem('contacts', JSON.stringify(contacts))
         updateContacts();
     }
+
     const selectContact = (contact) => {
         setSelectedContact(contact)
     }
     const logout = () => {
         localStorage.removeItem('user');
-        localStorage.removeItem('contacts');
+        localStorage.removeItem('contacts'); //not really suposed to delete - change this  to make the chats persistant
         window.location.href = '/';
     }
 

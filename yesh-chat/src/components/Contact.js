@@ -8,7 +8,7 @@ const Contact = ({ contact, selectContact }) => {
             onClick={() => selectContact(contact)}
             style={{cursor: 'pointer'}}
         >
-            <img className="contact" src={contact.picture} alt="chica" />
+            <img className="contact" src={contact.profilePic} alt="chica" />
             <div style={{
                 paddingLeft: 10,
                 display: 'flex',

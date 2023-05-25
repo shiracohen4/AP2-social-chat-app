@@ -4,14 +4,14 @@ const ContactListHeader = ({ user, addNewContact }) => {
     const [newContact, setNewContact] = useState('')
 
     const triggerAddNewContact = (e) => {
-        addNewContact(e, newContact)
+        addNewContact(e, newContact) //handle new contact in the contacts list
         setNewContact('');
         document.querySelector('.btn-close').click();
     }
 
     return (
         <div className="card-header" id="userHeader">
-            <img className="contact" src={user?.picture} alt=""></img>
+            <img className="contact" src={user?.profilePic} alt=""></img>
             <h5 className="contactnameh">{user?.displayName}</h5>
             <button id="addcontact" className="btn custom-btn" data-bs-toggle="modal" data-bs-target="#newContactModal"
                 z-index="1">
