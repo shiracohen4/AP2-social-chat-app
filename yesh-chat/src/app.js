@@ -28,9 +28,6 @@ const App = () => {
         } else {
             return true;
         }
-        // let users = JSON.parse(localStorage.getItem('users')) || [];
-        // users.push(data)
-        // localStorage.setItem('users', JSON.stringify(users));
     }
 
     const handleLogin = async (data) => {
@@ -57,24 +54,7 @@ const App = () => {
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user))
         window.location.href = '/chats';
-
-        // const users = JSON.parse(localStorage.getItem('users')) || [];
-        // const user = users.find((user) => user.username === data.username)
-        // const passwordMatches = user?.password === data.password;
-        // if (!user || !passwordMatches) { return alert('Wrong username or password') };
-        // alert('Logged in successfully!');
-        // localStorage.setItem('user', JSON.stringify(user))
-        //  window.location.href = '/chats';
     }
-    // const usernameTaken = async (data) => { //do not suppose to be here, the server will sent 409 if the username taken
-
-    //     const userData = JSON.parse(localStorage.getItem(data.username));
-    //     if (userData) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 
     useEffect(() => {
         checkLoggedIn()

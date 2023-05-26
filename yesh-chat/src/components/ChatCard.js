@@ -26,18 +26,6 @@ export const ChatCard = ({ contact, updateContacts, user, logout }) => { //the c
         updateContacts();
         setNewMessage('');
 
-
-        // const message = {
-        //     text: newMessage,
-        //     time: new Date(),
-        //     mine: true
-        // }
-        // const contacts = JSON.parse(localStorage.getItem('contacts'))
-        // const contactIndex = contacts.findIndex(chosenContact => chosenContact.displayName === contact.displayName)
-        // contacts[contactIndex].messages.push(message);
-        // localStorage.setItem('contacts', JSON.stringify(contacts))
-        // updateContacts();
-        // setNewMessage('');
     }
 
     const positionScroll = () => {

@@ -25,27 +25,60 @@ export const Chats = ({ user }) => {
                 contact.user.displayName === selectedContact.user.displayName)
             setSelectedContact(contact);
         }
-        const res4 = await fetch('http://localhost:5000/api/Chats/' + selectedContact.id, {
+        if (selectedContact) {
+            const res4 = await fetch('http://localhost:5000/api/Chats/' + selectedContact.id, {
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'authorization': 'bearer ' + token
+                }
+            })
+            if (res4.status !== 200) {
+                alert('failed open this contact chat or token time expired');
+                logout();
+            }
+            const chat = await res4.json();
+            setSelectedChat(chat);
+
+        }
+    }
+
+    const handleDeleteChat = async (contact_to_delete) => {
+
+        let token = JSON.parse(localStorage.getItem('token')) || []
+        const res5 = await fetch('http://localhost:5000/api/Chats/' + contact_to_delete.id, {
+            'method': 'delete',
             'headers': {
-                'Content-Type': 'application/json',
                 'authorization': 'bearer ' + token
             }
         })
-        if (res4.status !== 200) {
-            alert('failed open this contact chat or token time expired');
+        if (res5.status !== 204) {
+            alert('failed to delete chat or token is expired');
             logout();
         }
-        const chat = await res4.json();
-        setSelectedChat(chat);       //setSelectedChat
 
-        // const newContacts = JSON.parse(localStorage.getItem('contacts'))
-        // setContacts(newContacts)
-        // if (selectedContact) {
-        //     const contact = newContacts.find((contact) =>
-        //         contact.displayName === selectedContact.displayName)
-        //     setSelectedContact(contact);
-        // }
+
+        //update left chat card after deletion:
+        const res6 = await fetch('http://localhost:5000/api/Chats', {
+            'headers': {
+                'Content-Type': 'application/json',
+                'authorization': 'bearer ' + token,
+            }
+        })
+        const newContacts = await res6.json();
+        setContacts(newContacts);
+
+        if (selectedContact) {
+            const contact = newContacts.find((contact) =>
+                contact.user.displayName === selectedContact.user.displayName)
+            setSelectedContact(contact);
+        }
+
+        //update right chat card after deletion:
+        if(contact_to_delete.id === selectedContact?.id){
+            setSelectedContact(null);
+        }
     }
+
 
     const addNewContact = async (e, newContactUsername) => { //getch post to add new contact + render the contact list
         e.preventDefault();
@@ -64,19 +97,6 @@ export const Chats = ({ user }) => {
         }
         updateContacts();
 
-        // const contacts = JSON.parse(localStorage.getItem('contacts')) || [];
-        // const response = await fetch('https://randomuser.me/api/');
-        // const data = await response.json()
-        // const profilePic = data.results[0].profilePic.medium;
-        // const contact = {
-        //     displayName: newContact,
-        //     messages: [],
-        //     profilePic // --> picture : picture
-        // }
-
-        // contacts.push(contact);
-        // localStorage.setItem('contacts', JSON.stringify(contacts))
-        // updateContacts();
     }
 
     const selectContact = async (contact) => { //if the user clicked a contact - update the selected contact and its chat in the state variables
@@ -93,14 +113,13 @@ export const Chats = ({ user }) => {
             logout();
         }
         const chat = await res3.json();
-        setSelectedChat(chat);       //setSelectedChat
+        setSelectedChat(chat);      
 
 
     }
 
     const logout = () => {
         localStorage.removeItem('user');
-        // localStorage.removeItem('contacts'); //not really suposed to delete - change this  to make the chats persistant
         window.location.href = '/';
     }
 
@@ -126,6 +145,7 @@ export const Chats = ({ user }) => {
                     <ContactList
                         contacts={contacts}
                         selectContact={selectContact}
+                        handleDeleteChat={handleDeleteChat}
                     />
                 </div>
                 <div className="card text-center border-dark" id="chatcontent">

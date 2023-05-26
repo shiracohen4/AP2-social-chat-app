@@ -1,11 +1,12 @@
 import Contact from './Contact'
-const ContactList = ({ contacts, selectContact }) => {
+const ContactList = ({ contacts, selectContact,handleDeleteChat }) => {
 
     const sortByLastMessageTime = (a, b) => {
-        const lastMessageA = a.lastMessage;//  messages[a.messages.length - 1];
-        const lastMessageB = b.lastMessage;// messages[b.messages.length - 1];
+        const lastMessageA = a.lastMessage;
+        const lastMessageB = b.lastMessage;
 
-        if (!lastMessageA || !lastMessageB) { return -1 }
+        if (!lastMessageA) { return 1 };
+        if( !lastMessageB){return -1};
         if (lastMessageA.created < lastMessageB.created) {
             return 1;
         } else if (lastMessageA.created > lastMessageB.created) {
@@ -23,6 +24,7 @@ const ContactList = ({ contacts, selectContact }) => {
                         <Contact
                             contact={contact}
                             selectContact={selectContact}
+                            handleDeleteChat={handleDeleteChat}
                         />
                     )
                 })}
