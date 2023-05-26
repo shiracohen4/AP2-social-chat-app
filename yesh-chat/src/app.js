@@ -23,7 +23,7 @@ const App = () => {
             'body' : JSON.stringify(data)
         })
 
-        if (res1.status === 409) {
+        if (res1.status !== 200) {
             return false;
         } else {
             return true;
@@ -42,7 +42,7 @@ const App = () => {
             },
             'body' : JSON.stringify(data)
         })
-        if(res2.status === 404) { return alert('Wrong username or password') };
+        if(res2.status !== 200) { return alert('Wrong username or password') };
         alert('Logged in successfully!');
         const token = await res2.text();
         localStorage.setItem('token', JSON.stringify(token));

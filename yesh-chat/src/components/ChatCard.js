@@ -1,28 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import Message from './Message';
 
-export const ChatCard = ({ contact, updateContacts }) => {
+export const ChatCard = ({ contact, updateContacts, user, logout }) => { //the contact.user contain both the user and contact info we need user to distinguish between them
     const [newMessage, setNewMessage] = useState('')
-    const sendNewMessage = (e) => {
-        e.preventDefault();
-        const message = {
-            text: newMessage,
-            time: new Date(),
-            mine: true
-        }
-        const contacts = JSON.parse(localStorage.getItem('contacts'))
-        const contactIndex = contacts.findIndex(chosenContact => chosenContact.displayName === contact.displayName)
+    const [contactInfo, setContactInfo] = useState('');
+    //contact in the input includes:chatid, chat-users, messages.
+    //contactInfo contain only the contact info - username display name and picture
 
-        contacts[contactIndex].messages.push(message);
-        localStorage.setItem('contacts', JSON.stringify(contacts))
+    const sendNewMessage = async (e) => {
+        e.preventDefault();
+        const message = { "msg": newMessage };
+        let token = JSON.parse(localStorage.getItem('token')) || [];
+        const res = await fetch('http://localhost:5000/api/Chats/' + contact.id + '/Messages', {
+            'method': 'post',
+            'headers': {
+                'Content-Type': 'application/json',
+                'authorization': 'bearer ' + token
+            },
+            'body': JSON.stringify(message)
+        })
+        if (res.status !== 200) {
+            alert("failed to send new message or token time expired");
+            logout();
+        }
         updateContacts();
         setNewMessage('');
+
+
+        // const message = {
+        //     text: newMessage,
+        //     time: new Date(),
+        //     mine: true
+        // }
+        // const contacts = JSON.parse(localStorage.getItem('contacts'))
+        // const contactIndex = contacts.findIndex(chosenContact => chosenContact.displayName === contact.displayName)
+        // contacts[contactIndex].messages.push(message);
+        // localStorage.setItem('contacts', JSON.stringify(contacts))
+        // updateContacts();
+        // setNewMessage('');
     }
+
     const positionScroll = () => {
         const messageElement = document.querySelector('.messages');
         const scrollHeight = messageElement?.scrollHeight;
         const offsetHeight = messageElement?.offsetHeight;
-        const scrollTop = scrollHeight - offsetHeight; 
+        const scrollTop = scrollHeight - offsetHeight;
 
         if (messageElement) {
             messageElement.scrollTop = scrollTop;
@@ -30,6 +52,8 @@ export const ChatCard = ({ contact, updateContacts }) => {
     }
 
     useEffect(() => {
+        const contactInfoTemp = contact?.users?.find((obj) => obj.username !== user.username) //get the contact 
+        setContactInfo(contactInfoTemp);
         positionScroll();
     }, [contact])
 
@@ -37,19 +61,18 @@ export const ChatCard = ({ contact, updateContacts }) => {
         contact ? (
             <>
                 <div className="card-header" id="contactHeader">
-                    <img className="contact" src={contact.profilePic} alt="chica"></img>
-                    <h5 className="contactnameh">{contact.displayName}</h5>
+                    <img className="contact" src={contactInfo?.profilePic} alt="chica"></img> {/* contact.user */}
+                    <h5 className="contactnameh">{contactInfo?.displayName}</h5> {/* contact.user */}
                 </div>
                 <div className="card-body">
                     <div className="chat">
                         <div className="messages">
                             {
-                                contact.messages.map((message) =>
-                                    <Message message={message} />
+                                contact?.messages?.map((message) =>
+                                    <Message message={message} user={user} />
                                 )
                             }
                         </div>
-
                     </div>
                 </div>
                 <div className="card-footer text-body-secondary">

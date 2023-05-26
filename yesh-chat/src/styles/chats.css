@@ -120,6 +120,7 @@ body {
   padding-right: 10px;
   position: relative;
   top: -20px;
+  color: rgb(15, 15, 15);
 }
 
 #chatlistCard .card-body {

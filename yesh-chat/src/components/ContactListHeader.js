@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 const ContactListHeader = ({ user, addNewContact }) => {
     const [newContact, setNewContact] = useState('')
 
-    const triggerAddNewContact = (e) => {
-        addNewContact(e, newContact) //handle new contact in the contacts list
+    const triggerAddNewContact =  async(e) => {
+        await addNewContact(e, newContact) //handle new contact in the contacts list
         setNewContact('');
         document.querySelector('.btn-close').click();
     }
@@ -37,7 +37,7 @@ const ContactListHeader = ({ user, addNewContact }) => {
 
                                     <input
                                         value={newContact}
-                                        onChange={(e) => setNewContact(e.target.value)}
+                                        onChange={(e) => setNewContact(e.target.value)} //{"username": e.target.value}
                                         type="text"
                                         className="form-control"
                                         id="recipient-name"

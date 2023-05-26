@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
 import Contact from './Contact'
-
 const ContactList = ({ contacts, selectContact }) => {
+
     const sortByLastMessageTime = (a, b) => {
-        const lastMessageA = a.messages[a.messages.length - 1];
-        const lastMessageB = b.messages[b.messages.length - 1];
+        const lastMessageA = a.lastMessage;//  messages[a.messages.length - 1];
+        const lastMessageB = b.lastMessage;// messages[b.messages.length - 1];
 
         if (!lastMessageA || !lastMessageB) { return -1 }
-        if (lastMessageA.time < lastMessageB.time) {
+        if (lastMessageA.created < lastMessageB.created) {
             return 1;
-        } else if (lastMessageA.time > lastMessageB.time) {
+        } else if (lastMessageA.created > lastMessageB.created) {
             return -1;
         } else {
             return 0;
