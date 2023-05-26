@@ -1,24 +1,52 @@
 import React from 'react';
 import { formatTime } from '../utils/formatTime';
 
-const Contact = ({ contact, selectContact }) => {
+
+
+const Contact = ({ contact, selectContact, handleDeleteChat }) => {
+
+    const deleteContact = async (e) => {
+        e.stopPropagation();
+        await handleDeleteChat(contact);
+    }
+
     return (
-        <li 
-            className='contactList' 
-            onClick={() => selectContact(contact)}
-            style={{cursor: 'pointer'}}
+        <li
+            className='contactList'
+            onClick={async () => await selectContact(contact)}
+            style={{ cursor: 'pointer' }}
         >
-            <img className="contact" src={contact.picture} alt="chica" />
-            <div style={{
-                paddingLeft: 10,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start'
-            }}>
-                <h5 className="contactname">{contact.displayName}</h5>
-                <div className="last-msg">{contact.messages[contact.messages.length - 1]?.text}</div>
-            </div>
-            <h6 className="date">{formatTime(contact.messages[contact.messages.length - 1]?.time)}</h6>
+<img className="contact" src={contact.user.profilePic} alt="chica" />
+<div style={{
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+}}>
+    <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start'
+    }}>
+        <div>
+            <h5 className="contactname">{contact.user.displayName}</h5>
+        </div>
+        <div className="last-msg">{contact.lastMessage?.content}</div>
+    </div>
+    <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end'
+    }}>
+        <button className="delete-button" onClick={deleteContact}>
+            Delete
+        </button>
+        <h6 className="date" style={{ alignSelf: 'flex-end' }}>{formatTime(contact.lastMessage?.created)}</h6>
+    </div>
+</div>
+
+
+
         </li>
     )
 }

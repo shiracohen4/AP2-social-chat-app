@@ -3,15 +3,15 @@ import React, { useState } from 'react';
 const ContactListHeader = ({ user, addNewContact }) => {
     const [newContact, setNewContact] = useState('')
 
-    const triggerAddNewContact = (e) => {
-        addNewContact(e, newContact)
+    const triggerAddNewContact =  async(e) => {
+        await addNewContact(e, newContact) //handle new contact in the contacts list
         setNewContact('');
         document.querySelector('.btn-close').click();
     }
 
     return (
         <div className="card-header" id="userHeader">
-            <img className="contact" src={user?.picture} alt=""></img>
+            <img className="contact" src={user?.profilePic} alt=""></img>
             <h5 className="contactnameh">{user?.displayName}</h5>
             <button id="addcontact" className="btn custom-btn" data-bs-toggle="modal" data-bs-target="#newContactModal"
                 z-index="1">
@@ -37,7 +37,7 @@ const ContactListHeader = ({ user, addNewContact }) => {
 
                                     <input
                                         value={newContact}
-                                        onChange={(e) => setNewContact(e.target.value)}
+                                        onChange={(e) => setNewContact(e.target.value)} //{"username": e.target.value}
                                         type="text"
                                         className="form-control"
                                         id="recipient-name"
