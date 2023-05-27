@@ -1,6 +1,6 @@
 const {addUser} = require('../services/Users.js');
 const createUser = async (req, res) => {
-    result = await addUser(req.body);
+    const result = await addUser(req.body);
     // console.log(result);
     if (result === 409){
         res.status(409).send('Conflict');

@@ -47,10 +47,6 @@ const User = new Schema(
     }
 );
 
-
-// module.exports = mongoose.model('UserPassName', UserPassName);
-// module.exports = mongoose.model('User', User);
-
 module.exports = {
     'UserPassName': mongoose.model('UserPassName', UserPassName),
     'User': mongoose.model('User', User)

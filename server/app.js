@@ -32,7 +32,9 @@ server.get('/chats', (req, res) => {
 });
 
 const routerUsers = require('./routes/Users.js');
-
 server.use('/api/Users', routerUsers);
+
+const routerTokens = require('./routes/Tokens.js');
+server.use('/api/Tokens', routerTokens);
 
 server.listen(process.env.PORT);
