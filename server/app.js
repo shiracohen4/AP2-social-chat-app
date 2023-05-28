@@ -2,7 +2,7 @@ const express = require('express');
 const server = express();
 
 const bodyParser = require('body-parser');
-server.use(bodyParser.urlencoded({extended: true}));
+server.use(bodyParser.urlencoded({extended: true,limit: '25mb'}));
 
 const path = require('path');
 
@@ -18,7 +18,7 @@ mongoose.connect(process.env.CONNECTION_STRING, {
     useUnifiedTopology: true
 });
 
-server.use(express.json());
+server.use(express.json({limit: '25mb'}));
 
 server.use(express.static('public'));
 

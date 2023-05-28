@@ -26,6 +26,7 @@ const isLoggedIn = (req, res, next) => {
 
 const getUserDetails = async (req, res) => {
     const result = await getUser(req.params.username);
+    console.log('result: ' + JSON.stringify(result));
     if (result !== 402) {
         res.json(result);
     }

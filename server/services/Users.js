@@ -14,7 +14,7 @@ const addUser = async ({ username, password, displayName, profilePic }) => {
 }
 
 const getUser = async (username) => {
-    const user = await User.find({ 'username': username });
+    const user = await User.findOne({ 'username': username });
     if (!user || user === undefined || user.length === 0) { //usually, not supposed to happen
         return 402;
     }
