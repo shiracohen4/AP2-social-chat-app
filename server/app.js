@@ -37,4 +37,7 @@ server.use('/api/Users', routerUsers);
 const routerTokens = require('./routes/Tokens.js');
 server.use('/api/Tokens', routerTokens);
 
+const routerChats = require('./routes/Chats.js');
+server.use('/api/Chats', routerChats);
+
 server.listen(process.env.PORT);

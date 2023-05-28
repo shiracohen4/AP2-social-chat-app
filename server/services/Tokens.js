@@ -34,10 +34,22 @@ const isTokenValid = (headers) => {
             return 401;
         }
     }
-    else{
+    else {
         return 403;
     }
-    
+
 }
 
-module.exports = { createTokenService, isTokenValid };
+const usernameByToken = (tokenWithBearer) => {
+    const token = tokenWithBearer.split(" ")[1];
+    try {
+        // Verify the token is valid
+        const data = jwt.verify(token, key);
+        // Token validation was successful
+        return data.username;
+    } catch (err) {
+        return 401;
+    }
+}
+
+module.exports = { createTokenService, isTokenValid, usernameByToken };

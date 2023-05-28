@@ -6,23 +6,19 @@ const UserPassName = new Schema(
     {
         'username': {
             type: String,
-            required: true,
-            default: null
+            required: true
         },
         'password': {
             type: String,
-            required: true,
-            default: null
+            required: true
         },
         'displayName': {
             type: String,
-            required: true,
-            default: null
+            required: true
         },
         'profilePic': {
             type: String,
-            required: true,
-            default: null
+            required: true
         }
     }
 );
@@ -31,18 +27,15 @@ const User = new Schema(
     {
         'username': {
             type: String,
-            required: true,
-            default: null
+            required: true
         },
         'displayName': {
             type: String,
-            required: true,
-            default: null
+            required: true
         },
         'profilePic': {
             type: String,
-            required: true,
-            default: null
+            required: true
         }
     }
 );
