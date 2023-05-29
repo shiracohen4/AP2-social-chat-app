@@ -43,7 +43,8 @@ const addChatService = async (token, username) => {
     else {
         try {
             const currentUsername = usernameByToken(token); //get the current user username 
-            const currentUser = await User.findOne({ 'username': currentUsername }); //get the current user full details from the User db
+            var currentUser = await User.findOne({ 'username': currentUsername }); //get the current user full details from the User db
+            console.log(currentUser)
         }
         catch {
             return 401;
@@ -87,10 +88,42 @@ const getOneChatService = async (token, chatId) => {
             return 403;
         }
         return chat;
-        } catch (error) {
-            return 400;
-        }
-
+    } catch (error) {
+        return 400;
     }
 
-module.exports = { getChatsService, addChatService, getOneChatService };
+}
+
+const deleteChatService = async (token, chatId) => { //todo: make sure that the messages of the caht in the messages db also being deleted
+    const currentUsername = usernameByToken(token); //get the current user username for being sure its his chats.
+    if (currentUsername === 401) {
+        return 401;
+    }
+
+    try {
+        const chat = await Chat.findOne({ id: chatId }).populate('users'); //extract the chat required for deletion
+        if (!chat) { //this chatId not exist
+            return 404;
+        }
+
+        const currentUser2 = chat.users.find(user => user.username === currentUsername); //make sure the chat belongs to the current user
+        if (!currentUser2) {
+            return 402;
+        }
+
+        await Message.deleteMany({ id: { $in: chat.messages } }); //delete the messages in the db //todo:make sure it works as planned
+        await Chat.deleteOne({ id: chatId });
+        return 204;
+    }
+    catch { 
+        return 403;
+    }
+
+
+
+
+
+
+}
+
+module.exports = { getChatsService, addChatService, getOneChatService, deleteChatService };
