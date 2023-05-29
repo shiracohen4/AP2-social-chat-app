@@ -44,7 +44,6 @@ const addChatService = async (token, username) => {
         try {
             const currentUsername = usernameByToken(token); //get the current user username 
             var currentUser = await User.findOne({ 'username': currentUsername }); //get the current user full details from the User db
-            console.log(currentUser)
         }
         catch {
             return 401;
@@ -111,19 +110,46 @@ const deleteChatService = async (token, chatId) => { //todo: make sure that the 
             return 402;
         }
 
-        await Message.deleteMany({ id: { $in: chat.messages } }); //delete the messages in the db //todo:make sure it works as planned
+        // await Message.deleteMany({ id: { $in: chat.messages } }); //delete the messages in the db //todo:make sure it works as planned --> i think it not relevant because we only use the messages schema and not saving new messages there.
         await Chat.deleteOne({ id: chatId });
         return 204;
     }
-    catch { 
+    catch {
         return 403;
     }
 
-
-
-
-
-
 }
 
-module.exports = { getChatsService, addChatService, getOneChatService, deleteChatService };
+const addMessageService = async (token, chatId, msg) => {
+    const currentUsername = usernameByToken(token); //get the current user username for being sure its his chats.
+    if (currentUsername === 401) {
+        return 401;
+    }
+    try {
+        const chat = await Chat.findOne({ id: chatId }).populate('users').exec(); //check if the chat exists
+        if (!chat) {
+            return 404;
+        }
+
+        const isUserInChat = chat.users.some((chatUser) => chatUser.username === currentUsername); //make sure it's one of the current user's chats
+        if (!isUserInChat) {
+            return 403;
+        }
+
+        const user = await User.findOne({ username: currentUsername }).exec(); //get the full detailes of the current user
+
+        const newMessage = new Message({        // Create a new message using the provided msgContent and the user as the sender
+            sender: user,
+            content: msg
+        });
+
+        chat.messages.push(newMessage);    // Add the new message to the messages array of the chat
+        await chat.save();
+        return newMessage;
+
+    } catch {
+        return 402;
+    }
+}
+
+module.exports = { getChatsService, addChatService, getOneChatService, deleteChatService, addMessageService };

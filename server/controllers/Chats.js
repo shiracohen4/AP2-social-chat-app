@@ -1,4 +1,4 @@
-const { getChatsService, addChatService, getOneChatService, deleteChatService } = require('../services/Chats.js');
+const { getChatsService, addChatService, getOneChatService, deleteChatService, addMessageService } = require('../services/Chats.js');
 
 const getChats = async (req, res) => {
     const chats = await getChatsService(req.headers.authorization);
@@ -26,7 +26,6 @@ const addChat = async (req, res) => {
 const getOneChat = async (req, res) => {
 
     const result = await getOneChatService(req.headers.authorization, req.params.id);
-    console.log(result);
     if (result === 401) {
         res.status(401).send("Error: Unauthorized");
     }
@@ -44,7 +43,6 @@ const getOneChat = async (req, res) => {
 
 const deleteChat = async (req,res) => {
     const result = await deleteChatService(req.headers.authorization, req.params.id);
-    console.log("result: " + result);
     if(result === 401){
         res.status(401).send('Error: Unauthorized')
     }
@@ -59,11 +57,32 @@ const deleteChat = async (req,res) => {
         res.status(404).send('Error: Not Found')
 
     }
-    else{ //deletion succeeded
+    else if(result === 204){ //deletion succeeded
         res.status(204);
     }
 
     
 }
 
-module.exports = { getChats, addChat, getOneChat, deleteChat };
+const addMessage = async (req, res) => {
+    const result = await addMessageService(req.headers.authorization, req.params.id, req.body.msg);
+    if(result === 401){
+        res.status(401).send('Error: Unauthorized')
+    }
+    else if(result === 402){
+        res.status(402).send('failed adding new message')
+
+    }
+    else if(result === 403){
+        res.status(403).send('adding message is not allowed due to privaty')
+
+    }
+    else if(result === 404){
+        res.status(404).send('Error: Not Found')
+
+    }else {
+        res.status(200).json(result);
+    }
+}
+
+module.exports = { getChats, addChat, getOneChat, deleteChat, addMessage };
