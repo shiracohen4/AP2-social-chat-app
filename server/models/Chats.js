@@ -8,8 +8,7 @@ const Message = new Schema(
     {
         'id': {
             type: Number,
-            default: async function () {
-                // Find the maximum id value in the collection and increment it
+            default: async function () {                // Find the maximum id value in the collection and increment it
                 return await this.constructor.countDocuments().exec().then((count) => count + 1);
             }
         },

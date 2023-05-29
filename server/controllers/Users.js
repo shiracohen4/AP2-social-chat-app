@@ -17,7 +17,7 @@ const isLoggedIn = (req, res, next) => {
         return next();
     }
     else if (validToken === 401) { // if token is not valid
-        return res.status(401).send("Invalid Token");
+        return res.status(401).send("Error: Unauthorized");
     }
     else { // if token was not received
         return res.status(403).send('Token required');
@@ -26,7 +26,6 @@ const isLoggedIn = (req, res, next) => {
 
 const getUserDetails = async (req, res) => {
     const result = await getUser(req.params.username);
-    console.log('result: ' + JSON.stringify(result));
     if (result !== 402) {
         res.json(result);
     }

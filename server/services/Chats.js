@@ -7,7 +7,7 @@ const getChatsService = async (token) => {
     const currentUsername = usernameByToken(token);
     if (currentUsername === 401) {
         return 401;
-    } 
+    }
     try {//find all chats connected to this username+Query to find all chats that contain the current username in the "users" field array
         const chats = await Chat.find()
             .populate('users') // Populate the "users" field with User objects and exclude the "_id" field
@@ -35,17 +35,19 @@ const getChatsService = async (token) => {
     }
 }
 
-const addChatService = async (token, username) => { 
+const addChatService = async (token, username) => {
     const contact = await User.findOne({ 'username': username }); // check if contact exists in db
     if (!contact || contact === undefined || contact === 0) {
         return 400;
     }
     else {
-        const currentUsername = usernameByToken(token);        //save to database
-        if (currentUsername === 401) {
+        try {
+            const currentUsername = usernameByToken(token); //get the current user username 
+            const currentUser = await User.findOne({ 'username': currentUsername }); //get the current user full details from the User db
+        }
+        catch {
             return 401;
         }
-        const currentUser = await User.findOne({ 'username': currentUsername });
 
         const newChat = new Chat({
             'users': [
@@ -64,4 +66,31 @@ const addChatService = async (token, username) => {
     }
 }
 
-module.exports = { getChatsService, addChatService };
+const getOneChatService = async (token, chatId) => {
+    const currentUsername = usernameByToken(token); //get the current user username for being sure its his chats.
+    if (currentUsername === 401) {
+        return 401;
+    }
+
+
+    try { //if the there is not chat like this or the chat doesn't contain the user - return 401 unautorise
+
+        const chat = await Chat.findOne({ id: chatId }) //fidn the required chat in thw whole db (does not matther who is the user the asks for this chat)
+            .populate('users')
+            .exec();
+
+        if (!chat) {            // No matching chat found
+            return 402;
+        }
+        const isUsersChat = chat.users.some((user) => user.username === currentUsername);            // Do chat include the logged-in user
+        if (!isUsersChat) {
+            return 403;
+        }
+        return chat;
+        } catch (error) {
+            return 400;
+        }
+
+    }
+
+module.exports = { getChatsService, addChatService, getOneChatService };

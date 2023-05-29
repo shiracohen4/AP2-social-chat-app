@@ -49,8 +49,8 @@ export const ChatCard = ({ contact, updateContacts, user, logout }) => { //the c
         contact ? (
             <>
                 <div className="card-header" id="contactHeader">
-                    <img className="contact" src={contactInfo?.profilePic} alt="chica"></img> {/* contact.user */}
-                    <h5 className="contactnameh">{contactInfo?.displayName}</h5> {/* contact.user */}
+                    <img className="contact" src={contactInfo?.profilePic} alt="chica"></img> 
+                    <h5 className="contactnameh">{contactInfo?.displayName}</h5> 
                 </div>
                 <div className="card-body">
                     <div className="chat">

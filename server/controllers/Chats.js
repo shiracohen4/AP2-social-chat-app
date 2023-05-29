@@ -1,5 +1,4 @@
-const { getChatsService, addChatService } = require('../services/Chats.js');
-const { isTokenValid } = require('../services/Tokens.js');
+const { getChatsService, addChatService, getOneChatService } = require('../services/Chats.js');
 
 const getChats = async (req, res) => {
     const chats = await getChatsService(req.headers.authorization);
@@ -24,4 +23,23 @@ const addChat = async (req, res) => {
     }
 }
 
-module.exports = { getChats, addChat };
+const getOneChat = async (req, res) => {
+
+    const result = await getOneChatService(req.headers.authorization, req.params.id);
+    console.log(result);
+    if (result === 401) {
+        res.status(401).send("Error: Unauthorized");
+    }
+    else if (result === 402) {
+        res.status(402).send("chat not foundin db");
+    }
+    else if (result === 403) {
+        res.status(403).send("chat accsess is not allowed due to privaty");
+    }
+    else {
+        res.json(result);
+    }
+
+}
+
+module.exports = { getChats, addChat, getOneChat };
