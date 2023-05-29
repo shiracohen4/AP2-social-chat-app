@@ -76,7 +76,7 @@ const getOneChatService = async (token, chatId) => {
     try { //if the there is not chat like this or the chat doesn't contain the user - return 401 unautorise
 
         const chat = await Chat.findOne({ id: chatId }) //fidn the required chat in thw whole db (does not matther who is the user the asks for this chat)
-            .populate('users')
+            .populate('users').populate('messages.sender')
             .exec();
 
         if (!chat) {            // No matching chat found
@@ -152,4 +152,34 @@ const addMessageService = async (token, chatId, msg) => {
     }
 }
 
-module.exports = { getChatsService, addChatService, getOneChatService, deleteChatService, addMessageService };
+const getMessagesService = async (token, chatId) => {
+    const currentUsername = usernameByToken(token); //get the current user username for being sure its his chats.
+    if (currentUsername === 401) {
+        return 401;
+    }
+    try {
+        const chat = await Chat.findOne({ id: chatId })// Find the chat and populate the users field
+            .populate('users')
+            .exec();
+        if (!chat) {         // Check if the chat exists
+            return 404;
+        }
+        const isUserInChat = chat.users.some((chatUser) => chatUser.username === currentUsername);        // Check if the userUsername is in the users array of the chat
+        if (!isUserInChat) {
+            return 402;
+        }
+        const messages = chat.messages.map((message) => ({        // Map the messages to the desired format
+            id: message._id,
+            created: message.created,
+            sender: { username: message.sender.username },
+            content: message.content
+        }));
+        return messages;
+    } catch (error) {
+        return 403;
+    }
+
+
+}
+
+module.exports = { getChatsService, addChatService, getOneChatService, deleteChatService, addMessageService, getMessagesService };
