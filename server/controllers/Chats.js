@@ -44,21 +44,21 @@ const getOneChat = async (req, res) => {
 const deleteChat = async (req, res) => {
     const result = await deleteChatService(req.headers.authorization, req.params.id);
     if (result === 401) {
-        res.status(401).send('Error: Unauthorized')
+        res.status(401).send('Error: Unauthorized');
     }
     else if (result === 402) {
-        res.status(402).send('chat deletion is not allowed due to privacy')
+        res.status(402).send('chat deletion is not allowed due to privacy');
     }
     else if (result === 403) {
-        res.status(403).send('deleting failed')
+        res.status(403).send('deleting failed');
 
     }
     else if (result === 404) {
-        res.status(404).send('Error: Not Found')
+        res.status(404).send('Error: Not Found');
 
     }
     else if (result === 204) { //deletion succeeded
-        res.status(204);
+        res.status(204).send('deleteion succeeded');
     }
 
 

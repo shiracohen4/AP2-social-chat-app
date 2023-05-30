@@ -111,6 +111,7 @@ const deleteChatService = async (token, chatId) => { //todo: make sure that the 
         }
 
         // await Message.deleteMany({ id: { $in: chat.messages } }); //delete the messages in the db //todo:make sure it works as planned --> i think it not relevant because we only use the messages schema and not saving new messages there.
+        console.log(chat);
         await Chat.deleteOne({ id: chatId });
         return 204;
     }
