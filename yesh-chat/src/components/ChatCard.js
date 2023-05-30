@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Message from './Message';
 
-export const ChatCard = ({ contact, updateContacts, user, logout }) => { //the contact.user contain both the user and contact info we need user to distinguish between them
+export const ChatCard = ({ contact, updateContacts, user, logout,sendMessageSocket }) => { //the contact.user contain both the user and contact info we need user to distinguish between them
     const [newMessage, setNewMessage] = useState('')
     const [contactInfo, setContactInfo] = useState('');
     //contact in the input includes:chatid, chat-users, messages.
@@ -23,8 +23,11 @@ export const ChatCard = ({ contact, updateContacts, user, logout }) => { //the c
             alert("failed to send new message or token time expired");
             logout();
         }
+        sendMessageSocket(contact, message);
         updateContacts();
         setNewMessage('');
+
+        
 
     }
 

@@ -5,7 +5,7 @@ import ContactList from './ContactList';
 import { ChatCard } from './ChatCard';
 
 
-export const Chats = ({ user }) => {
+export const Chats = ({ user , sendMessageSocket}) => {
     const [contacts, setContacts] = useState([])
     const [selectedContact, setSelectedContact] = useState(null)
     const [selectedChat, setSelectedChat] = useState(null)
@@ -154,6 +154,7 @@ export const Chats = ({ user }) => {
                         updateContacts={updateContacts}
                         user={user}
                         logout={logout}
+                        sendMessageSocket={sendMessageSocket}
                     />
                 </div>
             </div>
