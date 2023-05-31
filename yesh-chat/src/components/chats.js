@@ -33,7 +33,7 @@ export const Chats = ({ user , sendMessageSocket}) => {
                 }
             })
             if (res4.status !== 200) {
-                alert('failed open this contact chat or token time expired');
+                alert('failed to open this contact chat or token time expired');
                 logout();
             }
             const chat = await res4.json();

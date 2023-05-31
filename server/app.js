@@ -55,8 +55,9 @@ io.on('connection', (socket) => {
     socket.on('message', (data) => {
         // Handle the message event here
         console.log(`Received message: ${data.message}`);
+        console.log('data: ' + JSON.stringify(data.contact))
         // You can broadcast the message to other clients in the same room
-        socket.to(data.room).emit('message', data);
+        socket.to(data.contact).emit('message', data);
       });
   
     // ...other event listeners and handlers...

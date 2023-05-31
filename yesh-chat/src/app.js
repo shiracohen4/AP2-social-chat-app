@@ -57,17 +57,23 @@ const App = () => {
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user))
 
+        window.location.href = '/chats';
+
         // Establish Socket.IO connection after successful login
         socket.emit('login', { username: user.username }); // Send the user's unique username to the server
-
-
-
-        window.location.href = '/chats';
     }
 
-    const sendMessageSocket = (contact1, message) => {
-        console.log('contact1: ' + contact1 + 'message: ' + message)
-        socket.emit('message', { room: contact1.username, message });
+    const sendMessageSocket = (chat, message) => {
+        const contact = 'contact';
+        if (chat.users[0].username == user.username){
+            contact = chat.users[1];
+        }
+        else {contact = chat.users[0];}
+        
+        console.log('contact: ' + JSON.stringify(contact.username) + 'message: ' + JSON.stringify(message))
+        console.log('1')
+        socket.emit('message', { contact: contact.username, message });
+        console.log('2')
     }
 
     useEffect(() => {
