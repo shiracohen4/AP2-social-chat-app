@@ -160,6 +160,7 @@ export const Chats = ({ user }) => { //, sendMessageSocket }) => {
         }
     }, [user]);
 
+
     useEffect(() => {
         updateContacts();
         //eslint-disable-next-line

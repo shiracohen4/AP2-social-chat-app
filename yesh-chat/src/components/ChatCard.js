@@ -24,7 +24,7 @@ export const ChatCard = ({ contact, updateContacts, user, logout, sendMessageSoc
             logout();
         }
         sendMessageSocket(contact, message);
-        updateContacts();
+        await updateContacts();
         setNewMessage('');
 
         
