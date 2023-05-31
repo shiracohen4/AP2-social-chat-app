@@ -5,7 +5,7 @@ import ContactList from './ContactList';
 import { ChatCard } from './ChatCard';
 
 
-export const Chats = ({ user , sendMessageSocket}) => {
+export const Chats = ({ user, sendMessageSocket, socket }) => {
     const [contacts, setContacts] = useState([])
     const [selectedContact, setSelectedContact] = useState(null)
     const [selectedChat, setSelectedChat] = useState(null)
@@ -74,7 +74,7 @@ export const Chats = ({ user , sendMessageSocket}) => {
         }
 
         //update right chat card after deletion:
-        if(contact_to_delete.id === selectedContact?.id){
+        if (contact_to_delete.id === selectedContact?.id) {
             setSelectedContact(null);
         }
     }
@@ -113,7 +113,7 @@ export const Chats = ({ user , sendMessageSocket}) => {
             logout();
         }
         const chat = await res3.json();
-        setSelectedChat(chat);      
+        setSelectedChat(chat);
 
 
     }
@@ -126,6 +126,7 @@ export const Chats = ({ user , sendMessageSocket}) => {
     useEffect(() => {
         updateContacts();
         //eslint-disable-next-line
+
     }, [])
 
     return (

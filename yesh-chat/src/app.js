@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './index.css';
 import { Login, Protected, Chats, Reg } from './components'
-import io from "socket.io-client";
+import {io} from "socket.io-client";
 
-const socket = io();
+var socket = io();
 
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(undefined);
@@ -58,22 +58,20 @@ const App = () => {
         localStorage.setItem('user', JSON.stringify(user))
 
         window.location.href = '/chats';
-
-        // Establish Socket.IO connection after successful login
         socket.emit('login', { username: user.username }); // Send the user's unique username to the server
+
+
     }
 
     const sendMessageSocket = (chat, message) => {
-        const contact = 'contact';
-        if (chat.users[0].username == user.username){
+        let contact = 'contact';
+        if (chat.users[0].username == user.username) {
             contact = chat.users[1];
         }
-        else {contact = chat.users[0];}
-        
-        console.log('contact: ' + JSON.stringify(contact.username) + 'message: ' + JSON.stringify(message))
-        console.log('1')
+        else { contact = chat.users[0]; }
+
+        console.log('contact: ' + JSON.stringify(contact.username) + 'message: ' + JSON.stringify(message));
         socket.emit('message', { contact: contact.username, message });
-        console.log('2')
     }
 
     useEffect(() => {
@@ -101,7 +99,7 @@ const App = () => {
                     <Route path="/register" element={<Reg handleReg={handleReg} />} />
                     <Route path='/chats' element={
                         <Protected isLoggedIn={isLoggedIn}>
-                            <Chats user={user} sendMessageSocket={sendMessageSocket} />
+                            <Chats user={user} sendMessageSocket={sendMessageSocket} socket={socket} />
                         </Protected>
                     } />
                 </Routes>
