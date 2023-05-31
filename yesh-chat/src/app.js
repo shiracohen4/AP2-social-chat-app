@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './index.css';
 import { Login, Protected, Chats, Reg } from './components'
-import {io} from "socket.io-client";
+// import {io} from "socket.io-client";
 
-var socket = io();
+// var socket = io();
 
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(undefined);
@@ -58,36 +58,37 @@ const App = () => {
         localStorage.setItem('user', JSON.stringify(user))
 
         window.location.href = '/chats';
-        socket.emit('login', { username: user.username }); // Send the user's unique username to the server
+        // socket.emit('login', { username: user.username }); // Send the user's unique username to the server
 
 
     }
 
-    const sendMessageSocket = (chat, message) => {
-        let contact = 'contact';
-        if (chat.users[0].username == user.username) {
-            contact = chat.users[1];
-        }
-        else { contact = chat.users[0]; }
+    // const sendMessageSocket = (chat, message) => {
+    //     let contact = 'contact';
+    //     if (chat.users[0].username == user.username) {
+    //         contact = chat.users[1];
+    //     }
+    //     else { contact = chat.users[0]; }
 
-        console.log('contact: ' + JSON.stringify(contact.username) + 'message: ' + JSON.stringify(message));
-        socket.emit('message', { contact: contact.username, message });
-    }
+    //     console.log('contact: ' + JSON.stringify(contact.username) + 'message: ' + JSON.stringify(message));
+    //      socket.emit('message', { contact: contact.username, message });
+    // }
 
     useEffect(() => {
         checkLoggedIn();
-        // Add a listener for the 'message' event
-        const handleMessage = (data) => {
-            console.log('server says i got new message');
-            alert(`New message received: ${data.message}`);
-        };
 
-        socket.on('message', handleMessage);
+        // // Add a listener for the 'message' event
+        // const handleMessage = (data) => {
+        //     console.log('server says i got new message');
+        //     alert(`New message received: ${data.message}`);
+        // };
 
-        // Clean up the socket listener when the component unmounts
-        return () => {
-            socket.off('message', handleMessage);
-        };
+        // socket.on('message', handleMessage);
+
+        // // Clean up the socket listener when the component unmounts
+        // return () => {
+        //     socket.off('message', handleMessage);
+        // };
 
     }, [])
 
@@ -99,7 +100,7 @@ const App = () => {
                     <Route path="/register" element={<Reg handleReg={handleReg} />} />
                     <Route path='/chats' element={
                         <Protected isLoggedIn={isLoggedIn}>
-                            <Chats user={user} sendMessageSocket={sendMessageSocket} socket={socket} />
+                            <Chats user={user}/> {/* sendMessageSocket={sendMessageSocket} />*/}  
                         </Protected>
                     } />
                 </Routes>

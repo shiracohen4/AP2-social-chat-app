@@ -45,21 +45,32 @@ server.use('/api/Tokens', routerTokens);
 const routerChats = require('./routes/Chats.js');
 server.use('/api/Chats', routerChats);
 
+const socketUserMap = new Map();
+
 io.on('connection', (socket) => {
   console.log(`socket ${socket.id} connected`);
 
   socket.on('login', (data) => {
+    console.log('inside login');
     const username = data.username;
-    socket.join(username); // Join the socket room with the user's unique username
-    console.log(`User ${username} joined the socket room`);
+    socketUserMap.set(username, socket); // Map the socket to the user's username
+    console.log(`${username}'s socket has been mapped:` + socketUserMap.get(username).id);
+
+    // socket.join(username); // Join the socket room with the user's unique username
+    // console.log(`User ${username} joined the socket room`);
   });
 
   socket.on('message', (data) => {
-    // Handle the message event here
-    console.log(`Received message: ${data.message}`);
-    console.log('data: ' + JSON.stringify(data.contact))
-    // You can broadcast the message to other clients in the same room
-    socket.to(data.contact).emit('message', data);
+    console.log('inside message');
+    // // Handle the message event here
+     console.log(`Received message: ${data.msg} from ${JSON.stringify(data.user)}`);
+    // // You can broadcast the message to other clients in the same room
+    const contactSocket = socketUserMap.get(data.contact);
+    if(contactSocket !== undefined){ //IF BECAUSE contact may not be loggedIN
+      console.log(`sending to ${data.contact} in the socket.id ${contactSocket.id} and alert..`)
+      contactSocket.emit('alert',{userSender:data.user, msg:data.msg});
+    }
+    // socket.to(data.contact).emit('message', data);
   });
 
   socket.on('disconnect', () => {
