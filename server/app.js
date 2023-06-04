@@ -68,7 +68,7 @@ io.on('connection', (socket) => {
     const contactSocket = socketUserMap.get(data.contact);
     if(contactSocket !== undefined){ //IF BECAUSE contact may not be loggedIN
       console.log(`sending to ${data.contact} in the socket.id ${contactSocket.id} and alert..`)
-      contactSocket.emit('alert',{userSender:data.user, msg:data.msg, chat:data.chat});
+      contactSocket.emit('alert',{userSender:data.user, msg:data.msg});
     }
     // socket.to(data.contact).emit('message', data);
   });

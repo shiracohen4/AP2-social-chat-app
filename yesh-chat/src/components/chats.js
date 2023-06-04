@@ -3,14 +3,14 @@ import '../styles/chats.css';
 import ContactListHeader from './ContactListHeader';
 import ContactList from './ContactList';
 import { ChatCard } from './ChatCard';
-// import io from 'socket.io-client';
+import io from 'socket.io-client';
 
 
 export const Chats = ({ user }) => { //, sendMessageSocket }) => {
     const [contacts, setContacts] = useState([])
     const [selectedContact, setSelectedContact] = useState(null)
     const [selectedChat, setSelectedChat] = useState(null);
-    // const [socket, setSocket] = useState(null);
+    const [socket, setSocket] = useState(null);
 
 
     const updateContacts = async () => { //get all the contacts from the db and update in the contact state for rendering
@@ -126,42 +126,39 @@ export const Chats = ({ user }) => { //, sendMessageSocket }) => {
         window.location.href = '/';
     }
 
-    // const sendMessageSocket = (chat, message) => {
-    //     if (socket) {
-    //         var contact = 'contact';
-    //         if (chat.users[0].username == user.username) {
-    //             contact = chat.users[1];
-    //         }
-    //         else { contact = chat.users[0]; }
+    const sendMessageSocket = (chat, message) => {
+        if (socket) {
+            var contact = 'contact';
+            if (chat.users[0].username == user.username) {
+                contact = chat.users[1];
+            }
+            else { contact = chat.users[0]; }
 
-    //         console.log('contact: ' + JSON.stringify(contact.username) + 'message: ' + JSON.stringify(message));
-    //         socket.emit('message', { contact: contact.username, msg: message.msg, user: user.username });
-    //     }
-    // }
+            console.log('contact: ' + JSON.stringify(contact.username) + 'message: ' + JSON.stringify(message));
+            socket.emit('message', { contact: contact.username, msg: message.msg ,user:user.username });
+        }
+    }
 
 
-    // useEffect(() => {
-    //     if (user) {
-    //         const socket = io(); // Replace with your server URL
-    //         setSocket(socket);
+    useEffect(() => {
+        if (user) {
+            const socket = io(); // Replace with your server URL
+            setSocket(socket);
 
-    //         socket.on('connect', () => {
-    //             socket.emit('login', { username: user.username }); // Emit a 'login' event with the user's username
-    //         });
+            socket.on('connect', () => {
+                socket.emit('login', { username: user.username }); // Emit a 'login' event with the user's username
+            });
 
-    //         socket.on('alert', async (data) => {
-    //             // Handle the alert event here (show an alert, update UI, etc.)
-    //             alert(`you got new message from ${data.userSender} saying: ${data.msg}`);
-    //             await updateContacts();
-    //             await selectContact(selectedContact);
-    //         });
-
-    //         return () => {
-    //             socket.disconnect(); // Disconnect the socket when the component unmounts
-    //         };
-
-    //     }
-    // }, [user]);
+            socket.on('alert', async (data) => {
+                // Handle the alert event here (show an alert, update UI, etc.)
+                alert(`you got new message from ${data.userSender} saying: ${data.msg}`);
+                await updateContacts();
+            });
+            return () => {
+                socket.disconnect(); // Disconnect the socket when the component unmounts
+            };
+        }
+    }, [user]);
 
 
     useEffect(() => {
@@ -196,7 +193,7 @@ export const Chats = ({ user }) => { //, sendMessageSocket }) => {
                         updateContacts={updateContacts}
                         user={user}
                         logout={logout}
-                        setSelectedChat={setSelectedChat}
+                        sendMessageSocket={sendMessageSocket}
                     />
                 </div>
             </div>
