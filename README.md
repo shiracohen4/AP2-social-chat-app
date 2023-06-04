@@ -1,7 +1,7 @@
 ## Running instructions
-Enter the project's folder "yesh-chat" by typing this in the command line:
+Enter the server's folder by typing this in the command line:
 ```
-cd yesh-chat
+cd server
 ```
 Then, start the app using this command:
 ```
@@ -11,11 +11,6 @@ Now you can start using it! <br>
 Start with registering and logging in :)
 
 ## What's new?
-In this assignment we have turned the web UI from the previous assignment into a React app and added some functionality to it using JavaScript and React.
-* The code is now divided into React components so that each component has its own functionality
-* Users are now able to register, pick a unique username and log in to the app using their personal password
-* Registration is only possible when filling out the fields according to the limitations we have set
-* The chats page is protected, so that users who are not logged in cannot access it
-* Users can add new contacts which will appear in their contact list on the left
-* When clicking a contact, a chat with them appears on the right and messages can be sent (but not recieved, as for this assignment)
-* After logging out, contacts and messages are not saved
+In the first part of this assignment we have adjusted our client-side code from the previous assignment to fit an API that was given to us, in order for it to communicate with a server. We have used GET and POST requests instead of using the browser's LocalStorage.<br>
+In the second part, we have written our own NodeJS server, and used MongoDB and Mongoose to manage the database for our app. We have handled the GET and POST requests from the client and made the server fit the mentioned API, thus making the chat app fully functional and saving data on its own server.<br>
+In the third and last part, we have used WebSockets to support real-time communication between users. Meaning, making messages appear right when they are sent from the server to a client, without the client having to request them. As for now, new messages will pop up in an alert.
