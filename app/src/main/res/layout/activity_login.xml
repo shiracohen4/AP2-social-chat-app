@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="16dp"
+tools:context=".LoginActivity"
+android:background="@color/white">
+
+<!-- Logo -->
+<ImageView
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:src="@drawable/logo"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+<!--        android:gravity="center">-->
+
+        <!-- Login Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Login"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_margin="30dp"
+            android:textColor="@color/my_darkgrey"/>
+<!--            android:font="@font/RobotoMedium"/>-->
+
+        <!-- Username Field -->
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:inputType="text"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- Password Field -->
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:layout_marginBottom="16dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- Log In Button -->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/login_btn"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="50dp"
+            android:backgroundTint="@color/my_pink"
+            android:textSize="20sp"/>
+
+        <!-- Register Button/Link -->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_now_btn"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/my_pink"
+            android:textSize="15dp"/>
+
+    </LinearLayout>
+</LinearLayout>
