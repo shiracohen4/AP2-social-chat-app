@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Yesh-Chat</string>
+    <string name="my_logo">my logo</string>
+    <string name="logout">Logout</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="display_name">DisplayName</string>
+    <string name="add_chat">Add Chat</string>
 </resources>
