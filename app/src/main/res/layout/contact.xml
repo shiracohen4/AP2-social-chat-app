@@ -1,10 +1,12 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="16dp"
-    android:background="#87CCA6EC">
+    android:background="@color/my_tpink">
 
 
     <ImageView
@@ -16,28 +18,38 @@
 
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_width="166dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="16dp"
+        android:layout_weight="1"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/displayName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Contact Name"
-            android:textSize="16sp"
-            android:textColor="#000000" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="191dp"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/lastMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Last Message"
-            android:textSize="14sp"
-            android:textColor="#808080" />
+            <TextView
+                android:id="@+id/displayName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Contact Name"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/lastMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Message"
+                android:textColor="#808080"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/displayName" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -52,8 +64,7 @@
             android:text="Delete"
             android:textSize="14sp"
             android:textColor="#808080"
-            android:background="#00000000"
-            android:padding="4dp"
+            android:backgroundTint="@color/white"
             android:layout_marginBottom="4dp" />
 
         <TextView
