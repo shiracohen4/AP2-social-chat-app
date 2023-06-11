@@ -1,0 +1,70 @@
+<!-- activity_settings.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#87CCA6EC"
+    android:orientation="vertical"
+    android:paddingTop="6dp">
+    <TextView
+        android:id="@+id/textViewServerAdress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:text="Select Server adress"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    <!-- Server address input -->
+    <EditText
+        android:id="@+id/editTextServerAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:hint="Server Address"
+        android:paddingStart="20dp" />
+
+    <!-- Title for theme selection -->
+    <TextView
+        android:id="@+id/textViewThemeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:text="Select Theme"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- Theme selection options -->
+    <RadioGroup
+        android:id="@+id/radioGroupTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:paddingStart="8dp">
+
+        <RadioButton
+            android:id="@+id/radioButtonLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Light" />
+
+        <RadioButton
+            android:id="@+id/radioButtonDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dark" />
+
+    </RadioGroup>
+
+    <!-- Save settings button -->
+    <Button
+        android:id="@+id/buttonSaveSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="6dp"
+        android:text="Save" />
+
+</LinearLayout>
