@@ -7,6 +7,19 @@
     android:background="#87CCA6EC"
     tools:context=".ChatActivity">
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="83dp"
+        android:layout_height="69dp"
+        android:contentDescription="@string/my_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024"
+        app:srcCompat="@drawable/logo" />
+
+    <!-- Guideline for separation between header and messages -->
 
     <LinearLayout
         android:id="@+id/headerLayout"
@@ -18,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/logo">
 
         <ImageView
             android:id="@+id/profilePic"
@@ -34,9 +47,8 @@
             android:text="Contact Name"
             android:textSize="16sp" />
 
-    </LinearLayout>
 
-    <!-- Guideline for separation between header and messages -->
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messagesRecyclerView"
