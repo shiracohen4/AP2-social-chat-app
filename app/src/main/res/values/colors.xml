@@ -9,4 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="RED">#D20000</color>
     <color name="yellow4">#FFFF00</color>
+    <color name="my_pink">#E7A4A3</color>
+    <color name="my_yellow">#FDDD59</color>
+    <color name="my_darkgrey">#474747</color>
+    <color name="my_lightgrey">#D8D8D8</color>
+    <color name="my_bg">#87CCA6EC</color>
 </resources>
