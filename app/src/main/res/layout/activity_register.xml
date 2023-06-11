@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,129 +10,185 @@
     tools:context=".LoginActivity"
     android:background="@color/white">
 
-    <!-- Logo -->
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/logo"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp" />
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <!--        android:gravity="center">-->
+        android:layout_height="match_parent">
 
-        <!-- Login Title -->
+        <!-- Logo -->
+        <ImageView
+            android:id="@+id/logo2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Register Title -->
+
         <TextView
+            android:id="@+id/reg_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Register"
+            android:textColor="@color/my_darkgrey"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:layout_margin="20dp"
-            android:textColor="@color/my_darkgrey"/>
-        <!--            android:font="@font/RobotoMedium"/>-->
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo2" />
 
-        <!-- Username Field -->
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:hint="Username"
-            android:inputType="text"
-            android:layout_margin="5dp"
-            android:layout_gravity="center_horizontal"/>
+
+            <!-- Username Field -->
 
         <!-- Password Field -->
         <EditText
+            android:id="@+id/reg_et_username"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:layout_marginBottom="16dp"
-            android:layout_margin="5dp"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:hint="Username"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/reg_title" />
 
         <!-- Confirm password Field -->
         <EditText
+            android:id="@+id/reg_et_password"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/reg_et_username" />
+
+        <EditText
+            android:id="@+id/reg_et_confirmPassword"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:hint="Confirm password"
             android:inputType="textPassword"
-            android:layout_marginBottom="16dp"
-            android:layout_margin="5dp"
-            android:layout_gravity="center_horizontal"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/reg_et_password" />
 
-        <!-- Display name Field -->
+            <!-- Display name Field -->
         <EditText
+            android:id="@+id/reg_et_displayName"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:hint="Display name"
             android:inputType="text"
-            android:layout_marginBottom="16dp"
-            android:layout_margin="5dp"
-            android:layout_gravity="center_horizontal"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/reg_et_confirmPassword" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/uploadImg_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reg_et_displayName">
 
-            <!-- Image Display -->
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/placeholder_image"
-                android:scaleType="centerCrop"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <!-- Image Upload Button -->
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="Upload Image"
-                android:layout_gravity="center_horizontal"
-                android:onClick="uploadImage"
-                android:backgroundTint="@color/my_yellow"
-                android:textColor="@color/my_darkgrey"
-                android:textSize="10dp"/>
+                    <!-- Image Display -->
 
-        </LinearLayout>
+                    <!-- Image Upload Button -->
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:layout_gravity="center_horizontal"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/placeholder_image"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/button"
+                        app:layout_constraintHorizontal_bias="0.684"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="60dp"
+                        android:backgroundTint="@color/my_yellow"
+                        android:onClick="uploadImage"
+                        android:text="Upload Image"
+                        android:textColor="@color/my_darkgrey"
+                        android:textSize="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.505" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
 
 
-        <!-- Register Button -->
+            <!-- Register Button -->
         <Button
+            android:id="@+id/reg_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/my_pink"
             android:paddingLeft="20dp"
+            android:paddingTop="5dp"
             android:paddingRight="20dp"
-            android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="@string/reg_btn"
             android:textColor="@color/white"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:backgroundTint="@color/my_pink"
-            android:textSize="20sp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/uploadImg_layout" />
 
-        <!-- Register Button/Link -->
+            <!-- Register Button/Link -->
         <Button
+            android:id="@+id/gotologin_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/my_pink"
             android:text="@string/already_reg_btn"
             android:textColor="@color/white"
-            android:layout_gravity="center_horizontal"
-            android:backgroundTint="@color/my_pink"
-            android:textSize="15dp"/>
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reg_btn" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
