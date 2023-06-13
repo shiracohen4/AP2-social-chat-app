@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg2"
+    android:background="?attr/backgroundPic"
     tools:context=".UI.ChatActivity">
 
     <LinearLayout
@@ -18,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/my_tpink">
+        android:background="?attr/contactBGColor">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                 android:layout_marginEnd="148dp"
                 android:text="Contact Name"
                 android:textSize="22sp"
-                android:textColor="@color/black"
+                android:textColor="?attr/textColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -98,7 +98,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
-                android:backgroundTint="@color/my_darkgrey"
+                android:backgroundTint="?attr/sendButtonColor"
+                android:textColor="?attr/sendButtonTextColor"
                 android:text="Send"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"

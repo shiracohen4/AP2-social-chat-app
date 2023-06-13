@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
+    android:background="?attr/backgroundPic"
     android:padding="16dp"
     tools:context=".UI.AddContactActivity">
 
@@ -29,6 +29,8 @@
         android:layout_marginEnd="16dp"
         android:hint="Enter contact username"
         android:inputType="text"
+        android:textColor="?attr/etColor"
+        android:textColorHint="?attr/etHintColor"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/usernameInput"
         android:backgroundTint="@color/my_pink"
+        android:textColor="?attr/buttonTextColor"
         android:text="Add"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"

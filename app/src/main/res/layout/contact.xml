@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="16dp"
-    android:background="@color/my_tpink">
+    android:background="?attr/contactBGContactListColor">
 
 
     <ImageView
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Contact Name"
-                android:textColor="#000000"
+                android:textColor="?attr/textColor"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Last Message"
-                android:textColor="#808080"
+                android:textColor="?attr/etHintColor"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -63,8 +63,8 @@
             android:layout_height="wrap_content"
             android:text="Delete"
             android:textSize="14sp"
-            android:textColor="#808080"
-            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:backgroundTint="?attr/deleteButtonColor"
             android:layout_marginBottom="4dp" />
 
         <TextView
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:text="12:34 PM"
             android:textSize="12sp"
-            android:textColor="#808080" />
+            android:textColor="?attr/etHintColor" />
 
     </LinearLayout>
 

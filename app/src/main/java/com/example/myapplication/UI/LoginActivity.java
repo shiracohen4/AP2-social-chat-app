@@ -20,13 +20,13 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
         // Retrieve the selected theme from SharedPreferences
         sharedPreferences = getSharedPreferences(THEME_PREFS_KEY, MODE_PRIVATE);
         int selectedTheme = sharedPreferences.getInt(SELECTED_THEME_KEY, R.style.LightTheme_MyApplication);
         setTheme(selectedTheme);
 
+        setContentView(R.layout.activity_login);
 
         //get the username and password views
         EditText login_et_username = findViewById(R.id.login_et_username);
@@ -54,8 +54,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        Button goRegButton = findViewById(R.id.gotoreg_btn);
-        goRegButton.setOnClickListener(new View.OnClickListener() {
+        Button gotoRegButton = findViewById(R.id.gotoreg_btn);
+        gotoRegButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));

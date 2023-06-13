@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary">
+    android:background="?attr/backgroundPic">
 
 
 
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:tint="@color/black" />
+        app:tint="?attr/textColor" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -75,7 +75,7 @@
                 android:text="@string/display_name"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/black"
+                android:textColor="?attr/textColor"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button_addChat"
@@ -86,15 +86,14 @@
                 android:id="@+id/button_addChat"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="28dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/add_chat"
                 android:src="@drawable/ic_add_chat"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:tint="@color/black" />
+                app:tint="?attr/textColor" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
