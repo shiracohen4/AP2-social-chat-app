@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="myCustomColor">@color/my_darkgrey</item>
     </style>
 
     <style name="DarkTheme2.MyApplication" parent="Theme.MaterialComponents.DayNight.NoActionBar">
