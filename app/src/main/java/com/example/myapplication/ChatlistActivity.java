@@ -1,6 +1,7 @@
 package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -9,9 +10,19 @@ import android.widget.TextView;
 
 public class ChatlistActivity extends AppCompatActivity {
 
+    private static final String THEME_PREFS_KEY = "theme_prefs";
+    private static final String SELECTED_THEME_KEY = "selected_theme";
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Retrieve the selected theme from SharedPreferences
+        sharedPreferences = getSharedPreferences(THEME_PREFS_KEY, MODE_PRIVATE);
+        int selectedTheme = sharedPreferences.getInt(SELECTED_THEME_KEY, R.style.LightTheme_MyApplication);
+        setTheme(selectedTheme);
+
         setContentView(R.layout.activity_chatlist);
 
         ImageButton logoutButton = findViewById(R.id.logoutButton);
@@ -20,6 +31,7 @@ public class ChatlistActivity extends AppCompatActivity {
         ImageButton setting_btn = findViewById(R.id.setting_btn);
         setting_btn.setOnClickListener(v->{
             startActivity(new Intent(ChatlistActivity.this,SettingActivity.class));
+            finish();
         });
 
 
@@ -39,9 +51,5 @@ public class ChatlistActivity extends AppCompatActivity {
         button_addChat.setOnClickListener(v->{
             startActivity(new Intent(ChatlistActivity.this,AddContactActivity.class));
         });
-
-
-
-
     }
 }
