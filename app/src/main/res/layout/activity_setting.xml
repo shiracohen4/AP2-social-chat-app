@@ -23,7 +23,6 @@
         android:layout_marginBottom="6dp"
         android:hint="Server Address"
         android:paddingStart="20dp" />
-
     <!-- Title for theme selection -->
     <TextView
         android:id="@+id/textViewThemeTitle"
@@ -55,9 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dark" />
-
     </RadioGroup>
-
     <!-- Save settings button -->
     <Button
         android:id="@+id/buttonSaveSettings"
@@ -67,5 +64,4 @@
         android:layout_marginBottom="6dp"
         android:backgroundTint="@color/my_pink"
         android:text="Save" />
-
 </LinearLayout>
