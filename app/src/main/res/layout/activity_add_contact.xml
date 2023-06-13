@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg2"
+    android:background="?attr/colorPrimary"
     android:padding="16dp"
     tools:context=".AddContactActivity">
 
@@ -37,7 +37,7 @@
         app:layout_constraintVertical_bias="0.132" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/addContactButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/usernameInput"
