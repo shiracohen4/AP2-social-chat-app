@@ -1,12 +1,13 @@
-package com.example.myapplication;
+package com.example.myapplication.UI;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.myapplication.R;
 
 public class ChatlistActivity extends AppCompatActivity {
 
@@ -28,11 +29,7 @@ public class ChatlistActivity extends AppCompatActivity {
         ImageButton logoutButton = findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(v->finish());
 
-        ImageButton setting_btn = findViewById(R.id.setting_btn);
-        setting_btn.setOnClickListener(v->{
-            startActivity(new Intent(ChatlistActivity.this,SettingActivity.class));
-            finish();
-        });
+
 
 
         Intent intent = getIntent();

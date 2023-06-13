@@ -24,6 +24,14 @@
         android:hint="Server Address"
         android:paddingStart="20dp" />
     <!-- Title for theme selection -->
+    <Button
+        android:id="@+id/buttonConnectServer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="6dp"
+        android:backgroundTint="@color/my_pink"
+        android:text="connect" />
     <TextView
         android:id="@+id/textViewThemeTitle"
         android:layout_width="wrap_content"
@@ -63,5 +71,5 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="6dp"
         android:backgroundTint="@color/my_pink"
-        android:text="Save" />
+        android:text="Save theme" />
 </LinearLayout>

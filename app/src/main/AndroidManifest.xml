@@ -14,7 +14,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".ChatActivity"
+            android:name=".UI.ChatActivity"
             android:exported="true">
             <!--            <intent-filter>-->
             <!--                <action android:name="android.intent.action.MAIN" />-->
@@ -22,16 +22,7 @@
             <!--            </intent-filter>-->
         </activity>
         <activity
-            android:name=".SettingActivity"
-            android:exported="true">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
-        </activity>
-
-        <activity
-            android:name=".RegisterActivity"
+            android:name=".UI.SettingActivity"
             android:exported="true">
             <!--            <intent-filter>-->
             <!--                <action android:name="android.intent.action.MAIN" />-->
@@ -40,7 +31,16 @@
         </activity>
 
         <activity
-            android:name=".AddContactActivity"
+            android:name=".UI.RegisterActivity"
+            android:exported="true">
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
+        </activity>
+
+        <activity
+            android:name=".UI.AddContactActivity"
             android:exported="true">
 
             <!-- <intent-filter> -->
@@ -50,7 +50,7 @@
         </activity>
 
         <activity
-            android:name=".ChatlistActivity"
+            android:name=".UI.ChatlistActivity"
             android:exported="true">
             <!--             <intent-filter>-->
             <!--                 <action android:name="android.intent.action.MAIN" />-->
@@ -59,7 +59,7 @@
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".UI.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
