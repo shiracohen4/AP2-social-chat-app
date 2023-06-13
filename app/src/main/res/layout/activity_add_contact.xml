@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="?attr/colorPrimary"
     android:padding="16dp"
-    tools:context=".AddContactActivity">
+    tools:context=".UI.AddContactActivity">
 
     <ImageView
         android:id="@+id/imageView"
