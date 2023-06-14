@@ -1,13 +1,11 @@
 package com.example.myapplication.UI;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioGroup;
-
 import com.example.myapplication.R;
 
 public class SettingActivity extends AppCompatActivity {
@@ -18,6 +16,7 @@ public class SettingActivity extends AppCompatActivity {
     private Button buttonSaveSettings;
     private Button buttonConnectServer;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +25,10 @@ public class SettingActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(THEME_PREFS_KEY, MODE_PRIVATE);
         int selectedTheme = sharedPreferences.getInt(SELECTED_THEME_KEY, R.style.LightTheme_MyApplication);
         setTheme(selectedTheme);
-
         setContentView(R.layout.activity_setting);
 
+
+        EditText editTextServerAddress = findViewById(R.id.editTextServerAddress);
         radioGroupTheme = findViewById(R.id.radioGroupTheme);
         buttonSaveSettings = findViewById(R.id.buttonSaveSettings);
         buttonSaveSettings.setOnClickListener(v -> {
@@ -37,7 +37,6 @@ public class SettingActivity extends AppCompatActivity {
 
         buttonConnectServer = findViewById(R.id.buttonConnectServer);
         buttonConnectServer.setOnClickListener(v -> {
-            
         });
     }
 
@@ -57,18 +56,6 @@ public class SettingActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
