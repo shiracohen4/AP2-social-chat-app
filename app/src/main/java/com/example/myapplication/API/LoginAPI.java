@@ -34,10 +34,12 @@ public class LoginAPI {
     }
 
     public void loginToServer(String username , String password){
+        Log.i("login_dtl",username);
+        Log.i("login_dtl",password);
         Call<String> call = webServiceAPI.logIn(new Login(username, password));
         call.enqueue(new Callback<String>(){
             @Override
-            public void onResponse(@NonNull Call <String> call, @NonNull Response<String> response){
+            public void onResponse(Call <String> call, Response<String> response){
                 if(response.code() == 200 && response.body() != null){
                     String token = response.body();
                     Info.loggerUserToken = token;

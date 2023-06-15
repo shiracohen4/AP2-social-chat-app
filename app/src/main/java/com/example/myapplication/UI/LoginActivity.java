@@ -44,8 +44,7 @@ public class LoginActivity extends AppCompatActivity implements Successable {
         ImageButton setting_btn = findViewById(R.id.setting_btn);
         Button goRegButton = findViewById(R.id.gotoreg_btn);
         //extract username and password values
-        username = login_et_username.getText().toString();
-        password = login_et_password.getText().toString();
+
 
 
         setting_btn.setOnClickListener(v -> {
@@ -61,6 +60,8 @@ public class LoginActivity extends AppCompatActivity implements Successable {
         });
 
         login_btn.setOnClickListener(v -> {
+            username = login_et_username.getText().toString();
+            password = login_et_password.getText().toString();
             LoginAPI loginAPI = new LoginAPI(this);
             loginAPI.loginToServer(username, password);
         });
