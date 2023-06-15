@@ -1,17 +1,19 @@
-package com.example.myapplication.room;
+package com.example.myapplication.models;
+
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "users")
 public class User {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-    private String username;
+    @PrimaryKey()
+    @NonNull
+    private String username; // id
     private String password;
     private String displayName;
     private String profilePic;
 
-    public User(String username, String password, String displayName, String profilePic) {
+    public User(String username, String password, String displayName, String profilePic) { //id is the username
         this.username = username;
         this.password = password;
         this.displayName = displayName;
@@ -19,14 +21,6 @@ public class User {
     }
 
     // Getters and setters for the properties
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -59,6 +53,18 @@ public class User {
     public void setProfilePic(String profilePic) {
         this.profilePic = profilePic;
     }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", profilePic='" + profilePic + '\'' +
+                '}';
+    }
+
 }
 
 

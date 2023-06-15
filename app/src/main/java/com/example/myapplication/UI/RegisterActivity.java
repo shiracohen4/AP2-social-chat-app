@@ -1,7 +1,7 @@
 package com.example.myapplication.UI;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
+import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -13,20 +13,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.example.myapplication.R;
-import com.example.myapplication.Repository.UserRepository;
-import com.example.myapplication.room.User;
-import com.example.myapplication.room.UserDAO;
-import com.example.myapplication.room.UserDatabase;
-import com.example.myapplication.room.UserResponse;
-import com.example.myapplication.service.RetrofitClient;
-import com.example.myapplication.service.UserService;
+import com.example.myapplication.succeable.Successable;
+import com.example.myapplication.viewModels.RegisterVM;
 import java.util.regex.Pattern;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements Successable {
 
     private EditText usernameEditText;
     private EditText passwordEditText;
@@ -36,8 +28,9 @@ public class RegisterActivity extends AppCompatActivity {
     private String profilePic;
     private Button uploadImageButton;
     private static final int PICK_IMAGE_REQUEST = 1;
+    private RegisterVM registerViewModel;
 
-    private UserRepository userRepository;
+//    private RegisterRepository userRepository;
 
 
 
@@ -51,20 +44,22 @@ public class RegisterActivity extends AppCompatActivity {
         confirmPasswordEditText = findViewById(R.id.reg_et_confirmPassword);
         displayNameEditText = findViewById(R.id.reg_et_displayName);
         imageView = findViewById(R.id.imageView);
-
         uploadImageButton = findViewById(R.id.uploadImage_btn);
-        uploadImageButton.setOnClickListener(v -> openFileChooser());
-
-
         Button registerButton = findViewById(R.id.reg_btn);
+
+        uploadImageButton.setOnClickListener(v -> openFileChooser());
         registerButton.setOnClickListener(v -> validateForm());
 
-        // Initialize the UserRepository
-        UserDatabase userDatabase = Room.databaseBuilder(getApplicationContext(),
-                UserDatabase.class, "user-database").build();
-        UserDAO userDAO = userDatabase.getUserDAO();
-        UserService userService = RetrofitClient.createService(UserService.class);
-        userRepository = new UserRepository(userDAO, userService);
+        registerViewModel = new ViewModelProvider(this).get(RegisterVM.class);
+        registerViewModel.setSuccessable(this);
+
+
+//        // Initialize the RegisterRepository
+//        UserDB userDatabase = Room.databaseBuilder(getApplicationContext(),
+//                UserDB.class, "user-database").build();
+//        UserDAO userDAO = userDatabase.getUserDAO();
+//        WebServiceAPI userService = RetrofitClient.createService(WebServiceAPI.class);
+//        userRepository = new RegisterRepository(userDAO, userService);
     }
 
     private void validateForm() {
@@ -73,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
         String confirmPassword = confirmPasswordEditText.getText().toString();
         String displayName = displayNameEditText.getText().toString();
 
-        if (username.isEmpty()) {
+        if (username == null || username.length() == 0) {
             showError("Please enter a username");
             return;
         }
@@ -90,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        if (password.isEmpty()) {
+        if (password == null || password.length() == 0) {
             showError("Please enter a password");
             return;
         }
@@ -113,37 +108,48 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        if (displayName.isEmpty()) {
+        if (displayName == null || displayName.length() == 0) {
             showError("Please enter a displayName");
             return;
         }
+        registerViewModel.registerUser(username,password,displayName,profilePic);
+
 
         // Create a new User object with the form data
-        User user = new User(username, password, displayName, profilePic);
+//        User user = new User(username, password, displayName, profilePic);
 
-        // Call the UserRepository to register the user
-        userRepository.registerUser(user, new Callback<UserResponse>() {
-            @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                // Handle the API response
-                if (response.isSuccessful()) {
-                    UserResponse userResponse = response.body();
-                    // Handle the successful registration
-                    Toast.makeText(RegisterActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
-                    finish(); // Finish the activity and go back to the previous screen
-                } else {
-                    // Handle registration failure
-                    showError("Registration failed");
-                    Log.i("tag2", response.toString() );
-                }
-            }
-            @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
-                // Handle API call failure
-                showError("Registration failed");
-                Log.i("tag","", t);
-            }
-        });
+        // Call the RegisterRepository to register the user
+//        userRepository.registerUser(user, new Callback<UserResponse>() {
+//            @Override
+//            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+//                // Handle the API response
+//                if (response.isSuccessful()) {
+//                    UserResponse userResponse = response.body();
+//                    // Handle the successful registration
+//                    Toast.makeText(RegisterActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
+//                    finish(); // Finish the activity and go back to the previous screen
+//                } else {
+//                    // Handle registration failure
+//                    showError("Registration failed");
+//                    Log.i("tag2", response.toString() );
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<UserResponse> call, Throwable t) {
+//                // Handle API call failure
+//                showError("Registration failed");
+//                Log.i("tag","", t);
+//            }
+//        });
+    }
+    @Override
+    public void onSuccess() {
+        Toast.makeText(RegisterActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
+        finish(); // Finish the activity and go back to the previous screen - login screen todo: remember to update the info logged-user after logging
+    }
+    @Override
+    public void onFail() {
+        showError("Registration failed or username taken"); //API call failure (executing/getting response)/usernametaken
     }
 
     private void showError(String message) {
