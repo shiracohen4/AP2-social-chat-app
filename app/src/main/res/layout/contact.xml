@@ -10,7 +10,7 @@
 
 
     <ImageView
-        android:id="@+id/profilePic"
+        android:id="@+id/ContactProfilePic"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:src="@drawable/pic"
@@ -29,7 +29,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/displayName"
+                android:id="@+id/ContactDisplayName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/lastMessage"
+                android:id="@+id/ContactLastMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Last Message"
@@ -68,7 +68,7 @@
             android:layout_marginBottom="4dp" />
 
         <TextView
-            android:id="@+id/hour"
+            android:id="@+id/ContactHour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="12:34 PM"

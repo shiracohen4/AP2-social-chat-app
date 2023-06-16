@@ -43,12 +43,11 @@ public class LoginAPI {
                 if(response.code() == 200 && response.body() != null){
                     String token = response.body();
                     Info.loggerUserToken = token;
+                    Info.isLogged = true;
                     Info.loggedUser = username;
                     successable.onSuccess();
                 }else{
-                    Log.i("code1", String.valueOf(response.code()));
                     if(response.body() != null){
-                        Log.i("code2", String.valueOf(response.body()));
                     }
                     Info.loggedUser = null;
                     Info.loggerUserToken = null;
@@ -57,7 +56,6 @@ public class LoginAPI {
             }
             @Override
             public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                Log.i("tag2", "on failure", t);
                 Info.loggedUser = null;
                 Info.loggerUserToken = null;
                 successable.onFail();

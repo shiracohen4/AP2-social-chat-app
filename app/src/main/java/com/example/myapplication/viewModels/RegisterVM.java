@@ -2,7 +2,7 @@ package com.example.myapplication.viewModels;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.myapplication.Repository.RegisterRepository;
+import com.example.myapplication.Repositories.RegisterRepository;
 import com.example.myapplication.succeable.Successable;
 
 public class RegisterVM extends ViewModel {

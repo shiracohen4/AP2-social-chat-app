@@ -1,20 +1,23 @@
 package com.example.myapplication.UI;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.myapplication.R;
 import com.example.myapplication.succeable.Successable;
 import com.example.myapplication.viewModels.RegisterVM;
+
 import java.util.regex.Pattern;
 
 
@@ -114,33 +117,6 @@ public class RegisterActivity extends AppCompatActivity implements Successable {
         }
         registerViewModel.registerUser(username,password,displayName,profilePic);
 
-
-        // Create a new User object with the form data
-//        User user = new User(username, password, displayName, profilePic);
-
-        // Call the RegisterRepository to register the user
-//        userRepository.registerUser(user, new Callback<UserResponse>() {
-//            @Override
-//            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-//                // Handle the API response
-//                if (response.isSuccessful()) {
-//                    UserResponse userResponse = response.body();
-//                    // Handle the successful registration
-//                    Toast.makeText(RegisterActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
-//                    finish(); // Finish the activity and go back to the previous screen
-//                } else {
-//                    // Handle registration failure
-//                    showError("Registration failed");
-//                    Log.i("tag2", response.toString() );
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<UserResponse> call, Throwable t) {
-//                // Handle API call failure
-//                showError("Registration failed");
-//                Log.i("tag","", t);
-//            }
-//        });
     }
     @Override
     public void onSuccess() {

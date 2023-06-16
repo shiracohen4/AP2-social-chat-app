@@ -2,17 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="16" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACTION_OPEN_DOCUMENT" />
+
+
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-
-    <uses-sdk
-        android:minSdkVersion="7"
-        android:targetSdkVersion="16" />
 
     <queries>
         <intent>
@@ -32,33 +36,27 @@
         android:supportsRtl="true"
         android:theme="@style/LightTheme.MyApplication"
         tools:targetApi="31">
-
+        <activity
+            android:name=".UI.MainActivity"
+            android:exported="false" />
         <activity
             android:name=".UI.ChatActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".UI.SettingActivity"
-            android:exported="true"></activity>
-
+            android:exported="true" />
         <activity
             android:name=".UI.RegisterActivity"
-            android:exported="true"></activity>
-
+            android:exported="true" />
         <activity
             android:name=".UI.AddContactActivity"
-            android:exported="true"></activity>
-
-        <activity
-            android:name=".UI.ChatlistActivity"
-            android:exported="true"></activity>
-
+            android:exported="true" />
         <activity
             android:name=".UI.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

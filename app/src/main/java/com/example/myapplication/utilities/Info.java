@@ -14,11 +14,13 @@ public class Info extends Application {
     public static UserDB usersDB;
     public static String baseUrlServer;
     public static String serverPort;
+    public static int contactId;
+
 
     @Override
     public void onCreate() {
         super.onCreate();
-        baseUrlServer = "http://10.0.2.2:" ;
+        baseUrlServer = "http://10.0.2.2:";
         serverPort = "5000";
         context = getApplicationContext();
         loggedUser = null;

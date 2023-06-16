@@ -1,15 +1,15 @@
 package com.example.myapplication.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.SharedPreferences;
-import android.widget.Button;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.API.LoginAPI;
 import com.example.myapplication.R;
@@ -69,11 +69,11 @@ public class LoginActivity extends AppCompatActivity implements Successable {
 
 
     public void onSuccess() {
-        Toast.makeText(this, "Welcome" + Info.loggedUser + "!",
+        Toast.makeText(this, "Welcome " + Info.loggedUser + "!",
                 Toast.LENGTH_SHORT).show();
         login_et_username.setText("");
         login_et_password.setText("");
-        Intent intent = new Intent(LoginActivity.this, ChatlistActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
     }
 

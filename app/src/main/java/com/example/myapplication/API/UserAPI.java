@@ -1,7 +1,9 @@
 package com.example.myapplication.API;
-import android.util.Log;
+
+import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
+
 import com.example.myapplication.models.User;
 import com.example.myapplication.room.UserDAO;
 import com.example.myapplication.service.WebServiceAPI;
@@ -45,7 +47,6 @@ public class UserAPI {
                                    @NonNull Response<Void> response) {
                 if (response.isSuccessful() && response.code() == 200) {
                     userDao.insert(user);
-                    User savedUser = userDao.getUserByUsername(username);
                     successable.onSuccess();
                 }
                 else {
@@ -58,5 +59,35 @@ public class UserAPI {
             }
         });
     }
+
+    public User getUser(String username) {
+        RoomUsers roomUsers = new RoomUsers(userDao, username);
+        User user;
+        try {
+            user = roomUsers.execute().get(); //execute:start the inBackground method. get: like await- wait for the response and don't continue until then.
+        }
+        catch (Exception exception) {
+            user = null;
+        }
+        return user;
+    }
+
+    // get user from room async
+    private class RoomUsers extends AsyncTask<Void, Void, User> {
+        private UserDAO userDao;
+        private String username;
+
+        public RoomUsers(UserDAO userDao, String username) {
+            this.userDao = userDao;
+            this.username = username;
+        }
+
+        @Override
+        protected User doInBackground(Void... voids) {
+            return userDao.getUserByUsername(username);
+        }
+    }
+
+
 
 }

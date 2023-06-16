@@ -1,4 +1,4 @@
-package com.example.myapplication.Repository;
+package com.example.myapplication.Repositories;
 import com.example.myapplication.API.UserAPI;
 import com.example.myapplication.succeable.Successable;
 
