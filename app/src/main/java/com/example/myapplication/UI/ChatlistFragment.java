@@ -6,8 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +29,6 @@ import com.example.myapplication.utilities.Info;
 import com.example.myapplication.viewModels.ContactsVM;
 import com.example.myapplication.viewModels.UserVM;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 public class ChatlistFragment extends Fragment {
 
     private static final String THEME_PREFS_KEY = "theme_prefs";
@@ -41,7 +39,6 @@ public class ChatlistFragment extends Fragment {
     private ContactsVM contactsViewModel;
     private RecyclerView listView;
     private ContactListAdapter adapter;
-
 
 
     @Nullable
@@ -73,25 +70,23 @@ public class ChatlistFragment extends Fragment {
         } else {
             displayName.setText(userViewModel.getUser(Info.loggedUser).getDisplayName());
         }
-        //present the profilePic
+        //present the User profilePic
         ImageView profilePic = view.findViewById(R.id.profilePic);
         if (userViewModel.getUser(Info.loggedUser) != null && userViewModel.getUser(Info.loggedUser).getProfilePic() != null) {
             String pic = userViewModel.getUser(Info.loggedUser).getProfilePic();
-            Uri profilePicUri = Uri.parse(pic);
-
-            try {
-                InputStream inputStream = requireContext().getContentResolver().openInputStream(profilePicUri);
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                profilePic.setImageBitmap(bitmap);
-                inputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }        }
-
+            Log.i("pic", pic);
+            // Convert the image string to a Uri
+//            Uri imageUri = Uri.parse(pic);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.FROYO && pic != "") {
+                byte[] profileImage = Base64.decode(pic, Base64.DEFAULT);
+                Bitmap image = BitmapFactory.decodeByteArray(profileImage, 0, profileImage.length);
+                profilePic.setImageBitmap(image);
+                Log.i("check","check");
+            }
+        }
 
         setAdapter();
         setContactList(view);
-
 
 
         ImageButton logoutButton = view.findViewById(R.id.logoutButton);

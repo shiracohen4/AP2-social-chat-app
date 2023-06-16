@@ -1,10 +1,13 @@
 package com.example.myapplication.UI;
 
+import static kotlin.io.ByteStreamsKt.readBytes;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.util.Base64;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,6 +21,8 @@ import com.example.myapplication.R;
 import com.example.myapplication.succeable.Successable;
 import com.example.myapplication.viewModels.RegisterVM;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.regex.Pattern;
 
 
@@ -55,14 +60,6 @@ public class RegisterActivity extends AppCompatActivity implements Successable {
 
         registerViewModel = new ViewModelProvider(this).get(RegisterVM.class);
         registerViewModel.setSuccessable(this);
-
-
-//        // Initialize the RegisterRepository
-//        UserDB userDatabase = Room.databaseBuilder(getApplicationContext(),
-//                UserDB.class, "user-database").build();
-//        UserDAO userDAO = userDatabase.getUserDAO();
-//        WebServiceAPI userService = RetrofitClient.createService(WebServiceAPI.class);
-//        userRepository = new RegisterRepository(userDAO, userService);
     }
 
     private void validateForm() {
@@ -153,10 +150,26 @@ public class RegisterActivity extends AppCompatActivity implements Successable {
                 imageView.setImageDrawable(null);
                 return;
             }
+            String base64Image = "";
+            // Read the image data from the content URI
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                byte[] imageBytes = readBytes(inputStream);
 
-            imageView.setImageURI(imageUri);
+                // Encode the image data as Base64
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.FROYO) {
+                    base64Image = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                }
+
+                // Use the base64Image string as needed (e.g., store it in the database)
+                // ...
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+
             // Set the profilePic variable with the image URI
-            profilePic = imageUri.toString();
+            profilePic = base64Image;
         }
     }
 

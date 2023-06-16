@@ -1,4 +1,5 @@
 package com.example.myapplication.service;
+
 import com.example.myapplication.models.Contact;
 import com.example.myapplication.models.Login;
 import com.example.myapplication.models.User;
@@ -20,5 +21,4 @@ public interface WebServiceAPI {
 
     @GET("/api/Chats")
     Call<List<Contact>> getAllContacts(@Header("authorization") String auth);
-
 }

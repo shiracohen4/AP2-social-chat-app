@@ -28,5 +28,6 @@ public class Info extends Application {
         isLogged = false;
         usersDB = Room.databaseBuilder(getApplicationContext(), UserDB.class, "user")
                 .allowMainThreadQueries().fallbackToDestructiveMigration().build();
+
     }
 }
