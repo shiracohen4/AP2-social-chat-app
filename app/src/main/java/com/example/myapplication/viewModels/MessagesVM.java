@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.myapplication.Repositories.MessageRepository;
 import com.example.myapplication.models.Message;
+import com.example.myapplication.models.SendMsg;
 
 import java.util.List;
 
@@ -19,6 +20,10 @@ public class MessagesVM extends ViewModel {
     public LiveData<List<Message>> get() {
         return messages;
     } //return messagesList to adapter
+
+    public void add(SendMsg message) {
+        messageRepository.add(message);
+    }
 
 
 

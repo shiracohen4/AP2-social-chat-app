@@ -6,6 +6,7 @@ import androidx.room.Room;
 
 import com.example.myapplication.API.MessageAPI;
 import com.example.myapplication.models.Message;
+import com.example.myapplication.models.SendMsg;
 import com.example.myapplication.room.AppDB;
 import com.example.myapplication.room.ContactDAO;
 import com.example.myapplication.room.MessageDAO;
@@ -50,5 +51,8 @@ public class MessageRepository {
                 "Bearer " + Info.loggerUserToken, Info.contactId);
     }
 
+    public void add(SendMsg message) {
+        messageApi.add(messagesListData , message);
+    }
 
 }

@@ -5,7 +5,10 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.myapplication.models.AddMessageResponse;
 import com.example.myapplication.models.Message;
+import com.example.myapplication.models.SendMsg;
+import com.example.myapplication.models.UserUsername;
 import com.example.myapplication.room.MessageDAO;
 import com.example.myapplication.service.WebServiceAPI;
 import com.example.myapplication.utilities.Info;
@@ -58,15 +61,50 @@ public class MessageAPI {
                         }
                         messages.postValue(response.body());
                     }).start();
-                }
-                else{
+                } else {
                     Log.e("error", "server response was not successful or != 200");
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Message>> call, @NonNull Throwable t) {
-                Log.e("error2", "onFailure",t);
+                Log.e("error2", "onFailure", t);
+            }
+        });
+    }
+
+
+    public void add(MutableLiveData<List<Message>> messages, SendMsg message) {
+
+        Call<AddMessageResponse> call = webServiceAPI.postMessage(Info.contactId, message, "bearer " +Info.loggerUserToken);
+        call.enqueue(new Callback<AddMessageResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<AddMessageResponse> call, @NonNull Response<AddMessageResponse> response) {
+                if (response.isSuccessful() && response.code() == 200) {
+                    Message newMsg = new Message(response.body().getId(),
+                            response.body().getCreated(),
+                            new UserUsername(response.body().getSender().getUsername()),
+                                    response.body().getContent());
+                    newMsg.setChatId(Info.contactId);
+                    messageDao.insert(newMsg);
+                    List<Message> chatMsgRoom = messageDao.getChatMessages(Info.contactId);
+                    Log.i("addMessage" , chatMsgRoom.toString());
+                    List<Message> newMessageList = messages.getValue();
+                    newMessageList.add(newMsg);
+                    messages.postValue(newMessageList);
+                }
+                else{
+                    Log.i("addMessage" , "response isn't successful || status code isn't 200");
+                    Log.i("response.isSuccessful()" , String.valueOf(response.isSuccessful()));
+                    Log.i("response.code()()" , String.valueOf(response.code()));
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<AddMessageResponse> call, @NonNull Throwable t) {
+                Log.e("error", "server had problem with posting message operation",t);
             }
         });
     }

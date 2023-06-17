@@ -5,8 +5,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapters.MessageListAdapter;
+import com.example.myapplication.models.SendMsg;
 import com.example.myapplication.utilities.Info;
 import com.example.myapplication.viewModels.MessagesVM;
 
@@ -34,7 +38,7 @@ public class ChatActivity extends AppCompatActivity {
         setNicknameHeader();
         setPictureHeader();
         setMessageList(); //display chat messages
-
+        setMessageBar(); //send new message
     }
 
 
@@ -72,4 +76,22 @@ public class ChatActivity extends AppCompatActivity {
 
         messagesListRV.setAdapter(adapter);
     }
+
+    private void setMessageBar() { //send message functionality
+        Button sendMsgButton = findViewById(R.id.sendMsgButton);
+        sendMsgButton.setOnClickListener(v -> {
+            EditText messageET = findViewById(R.id.newMessageInput);
+            String content = messageET.getText().toString();
+            if (content.equals("")) {
+                Toast.makeText(this, "There is nothing to send", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // set the textbox to be null
+            messageET.setText("");
+            SendMsg message = new SendMsg(content);
+            messagesViewModel.add(message);
+        });
+    }
+    //todo: on destroyed to change the contactId!!!!!!!!
 }

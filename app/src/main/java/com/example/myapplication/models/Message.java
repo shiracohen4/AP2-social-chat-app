@@ -12,16 +12,8 @@ public class Message {
     @PrimaryKey(autoGenerate = true)
     private int msgId;
 
-    public int getMsgId() {
-        return msgId;
-    }
-
-    public void setMsgId(int msgId) {
-        this.msgId = msgId;
-    }
-
     String chatId;
-    private int id;
+    private int id;//(msg)
     private Date created;
     private UserUsername sender;
     private String content;
@@ -33,8 +25,21 @@ public class Message {
         this.sender = sender;
         this.content = content;
     }
+//    public Message(int id, Date created, UserWithoutPass sender, String content) {
+//        this.id = id;
+//        this.created = created;
+//        this.sender = new UserUsername(sender.getUsername());
+//        this.content = content;
+//    }
 
     // Getters and setters for the properties
+    public int getMsgId() {
+        return msgId;
+    }
+
+    public void setMsgId(int msgId) {
+        this.msgId = msgId;
+    }
     public void setChatId(String chatId){
         this.chatId = chatId;
     }
@@ -80,5 +85,11 @@ public class Message {
         }else{
             return false;
         }
+    }
+
+    public String toString() {
+        return "message{" +
+                "sender='" + getSender().getUsername() + '\'' +
+                ", content ='" + getContent() +'}' ;
     }
 }
