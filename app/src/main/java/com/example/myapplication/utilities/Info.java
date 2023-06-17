@@ -14,7 +14,7 @@ public class Info extends Application {
     public static UserDB usersDB;
     public static String baseUrlServer;
     public static String serverPort;
-    public static int contactId;
+    public static String contactId;
 
 
     @Override
