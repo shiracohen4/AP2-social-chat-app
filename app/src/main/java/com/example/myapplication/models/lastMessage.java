@@ -1,23 +1,16 @@
 package com.example.myapplication.models;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
 import java.util.Date;
 
-@Entity(tableName = "messages")
-public class Message {
-
-    @PrimaryKey
+public class lastMessage {
     private int id;
     private Date created;
-    private UserWithoutPass sender;
     private String content;
 
-    public Message(int id, Date created, UserWithoutPass sender, String content) {
+
+    public lastMessage(int id, Date created, String content) {
         this.id = id;
         this.created = created;
-        this.sender = sender;
         this.content = content;
     }
 
@@ -37,14 +30,6 @@ public class Message {
 
     public void setCreated(Date created) {
         this.created = created;
-    }
-
-    public UserWithoutPass getSender() {
-        return sender;
-    }
-
-    public void setSender(UserWithoutPass sender) {
-        this.sender = sender;
     }
 
     public String getContent() {

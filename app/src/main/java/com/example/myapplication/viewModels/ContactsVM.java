@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ContactsVM extends ViewModel {
     private ContactRepository contactRepository;
-    private LiveData<List<Contact>> contacts; //read-only
+    private LiveData<List<Contact>> contacts; //read-only, the ui fragmentList observes it
 
     public ContactsVM() {
         this.contactRepository = new ContactRepository();

@@ -5,13 +5,14 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "contacts")
 public class Contact {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private int id;
     private UserWithoutPass user;
-    private Message lastMessage;
+    private lastMessage lastMessage;
 
 
-    public Contact(UserWithoutPass user, Message lastMessage) {
+    public Contact(int id, UserWithoutPass user, lastMessage lastMessage) {
+        this.id = id;
         this.user = user;
         this.lastMessage = lastMessage;
     }
@@ -34,11 +35,21 @@ public class Contact {
         this.user = user;
     }
 
-    public Message getLastMessage() {
+    public lastMessage getLastMessage() {
         return lastMessage;
     }
 
-    public void setLastMessage(Message lastMessage) {
+    public void setLastMessage(lastMessage lastMessage) {
         this.lastMessage = lastMessage;
+    }
+
+    public String toString() {
+        String content = "";
+        if(lastMessage != null){content = lastMessage.getContent();};
+        return "User{" +
+                "id='" + id + '\'' +
+                ", user ='" + user.getUsername() + '\'' +
+                ", lastMessage..'" + content
+        + '\''+'}' ; //todo:to delete getContent() cause might be null
     }
 }

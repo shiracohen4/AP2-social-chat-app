@@ -1,5 +1,7 @@
 package com.example.myapplication.API;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
@@ -27,7 +29,7 @@ public class ContactAPI {
 
 
     public ContactAPI(ContactDAO contactDao) {
-        Gson gson = new GsonBuilder().setLenient().create();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSS").setLenient().create();
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(Info.baseUrlServer +
                         Info.serverPort + "/")
@@ -44,27 +46,29 @@ public class ContactAPI {
 
     public void getAllContacts(MutableLiveData<List<Contact>> contacts, String token) { //contacts=contactListData[liveData List<Contact>] of repository
         Call<List<Contact>> call = webServiceAPI.getAllContacts(token);
+        Log.i("contacts.getValue()", contacts.getValue().toString());
         call.enqueue(new Callback<List<Contact>>() {
             @Override
             public void onResponse(@NonNull Call<List<Contact>> call,
                                    @NonNull Response<List<Contact>> response) {
+                Log.i("response.body",response.body().toString());
                 new Thread(() -> {
                     contactDao.clear(); //delete all contacts records
                     if (response.body() == null) {
                         return;
                     }
-
                     // add the all contacts to the dao
                     for (Contact contact : response.body()) { //update the local db with the the server contacts
                         contactDao.insert(contact);
                     }
-                    contacts.postValue(response.body()); //push to the repository xcontactListData the full contacts items
+                    contacts.postValue(response.body()); //push to the repository contactListData the full contacts items
                 }).start();
                 //todo: onSuccess()?
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Contact>> call, @NonNull Throwable t) {
+                Log.i("onFailure","onfailure",t);
                 //todo
             }
         });
