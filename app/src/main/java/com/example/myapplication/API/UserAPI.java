@@ -39,7 +39,7 @@ public class UserAPI {
 
     //register in service + local db
     public void addUser(String username, String password, String displayName, String profilePic) {
-        User user = new User(username, password,displayName, profilePic);
+        User user = new User(username, password, displayName, profilePic);
         Call<Void> call = webServiceAPI.registerUser(user);
         call.enqueue(new Callback<Void>() {
             @Override

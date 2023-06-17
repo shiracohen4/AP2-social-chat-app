@@ -168,6 +168,9 @@ public class RegisterActivity extends AppCompatActivity implements Successable {
                 return;
             }
 
+            //set the imageView to the chosen image
+            imageView.setImageURI(imageUri);
+
             // Set the profilePic variable with the image URI
             profilePic = base64Image;
         }

@@ -18,6 +18,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +40,7 @@ public class ChatlistFragment extends Fragment {
     private ContactsVM contactsViewModel;
     private RecyclerView listView;
     private ContactListAdapter adapter;
+    private ImageButton button_addChat;
 
 
     @Nullable
@@ -88,11 +91,12 @@ public class ChatlistFragment extends Fragment {
             requireActivity().finish();
         });
 
+        setAddContactBtn(view);
 
-        ImageButton button_addChat = view.findViewById(R.id.button_addChat);
-        button_addChat.setOnClickListener(v -> {
-            startActivity(new Intent(requireContext(), AddContactActivity.class)); //todo: change to fragment
-        });
+//        ImageButton button_addChat = view.findViewById(R.id.button_addChat);
+//        button_addChat.setOnClickListener(v -> {
+//            startActivity(new Intent(requireContext(), AddContactFragment.class)); //todo: change to fragment
+//        });
     }
 
     private void setAdapter() { //create the contacts adapter and the onClick listener
@@ -114,5 +118,24 @@ public class ChatlistFragment extends Fragment {
         });
         listView.setAdapter(adapter);
         listView.setClickable(true); //Enabling clickability on the RecyclerView so it opens a chat activity with the selected contact.
+    }
+
+    private void setAddContactBtn(View view) {
+        button_addChat = view.findViewById(R.id.button_addChat);
+        button_addChat.setOnClickListener(v -> {
+
+            Fragment fragment = new AddContactFragment();
+//            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentManager fragmentManager = getChildFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.addContactFragmentContainer, fragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
+            // Show the add contact fragment container
+            ViewGroup addContactContainer = view.findViewById(R.id.addContactFragmentContainer);
+            addContactContainer.bringToFront(); // Bring the container to the front
+            addContactContainer.setVisibility(View.VISIBLE);
+        });
     }
 }

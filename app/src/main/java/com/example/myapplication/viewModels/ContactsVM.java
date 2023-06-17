@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.myapplication.Repositories.ContactRepository;
 import com.example.myapplication.models.Contact;
+import com.example.myapplication.models.NewContact;
 import com.example.myapplication.succeable.Successable;
 
 import java.util.List;
@@ -24,5 +25,9 @@ public class ContactsVM extends ViewModel {
 
     public void setSuccessable(Successable successable) {
         contactRepository.setSuccessable(successable);
+    }
+
+    public void add(NewContact contact) {
+        contactRepository.add(contact);
     }
 }
