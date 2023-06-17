@@ -1,17 +1,19 @@
 package com.example.myapplication.models;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "contacts")
 public class Contact {
-    @PrimaryKey
-    private int id;
+    @PrimaryKey()
+    @NonNull
+    private String id; //todo:upload version from 3 -> 4
     private UserWithoutPass user;
     private lastMessage lastMessage;
 
 
-    public Contact(int id, UserWithoutPass user, lastMessage lastMessage) {
+    public Contact(String id, UserWithoutPass user, lastMessage lastMessage) {
         this.id = id;
         this.user = user;
         this.lastMessage = lastMessage;
@@ -19,11 +21,11 @@ public class Contact {
 
     // Getters and setters for the properties
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -2,6 +2,7 @@ package com.example.myapplication.service;
 
 import com.example.myapplication.models.Contact;
 import com.example.myapplication.models.Login;
+import com.example.myapplication.models.Message;
 import com.example.myapplication.models.User;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface WebServiceAPI {
     @POST("/api/Users")
@@ -21,4 +23,8 @@ public interface WebServiceAPI {
 
     @GET("/api/Chats")
     Call<List<Contact>> getAllContacts(@Header("authorization") String auth);
+
+    @GET("api/Chats/{id}/Messages")
+    Call<List<Message>> getMessages(@Path("id") String chatId, @Header("authorization") String auth);
+
 }

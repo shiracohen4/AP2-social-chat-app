@@ -17,4 +17,5 @@ public interface ContactDAO {
 
     @Query("DELETE FROM contacts")
     void clear();
+
 }
