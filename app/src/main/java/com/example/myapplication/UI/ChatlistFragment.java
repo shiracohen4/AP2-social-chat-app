@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,8 +57,8 @@ public class ChatlistFragment extends Fragment {
         requireActivity().setTheme(selectedTheme);
 
 
-        userViewModel = new ViewModelProvider(requireActivity()).get(UserVM.class); //get the user details - from localdb , using userDao
-        contactsViewModel = new ViewModelProvider(requireActivity()).get(ContactsVM.class); //get list of all contacts locally and then when observed syncing from service
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserVM.class); //userVM role: get the user details - from localdb , using userDao
+        contactsViewModel = new ViewModelProvider(requireActivity()).get(ContactsVM.class); //contactsVM role: get list of all contacts locally and then when observed syncing from service
 
 
         //present the displayName
@@ -74,20 +73,15 @@ public class ChatlistFragment extends Fragment {
         ImageView profilePic = view.findViewById(R.id.profilePic);
         if (userViewModel.getUser(Info.loggedUser) != null && userViewModel.getUser(Info.loggedUser).getProfilePic() != null) {
             String pic = userViewModel.getUser(Info.loggedUser).getProfilePic();
-            Log.i("pic", pic);
-            // Convert the image string to a Uri
-//            Uri imageUri = Uri.parse(pic);
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.FROYO && pic != "") {
                 byte[] profileImage = Base64.decode(pic, Base64.DEFAULT);
                 Bitmap image = BitmapFactory.decodeByteArray(profileImage, 0, profileImage.length);
                 profilePic.setImageBitmap(image);
-                Log.i("check","check");
             }
         }
 
         setAdapter();
         setContactList(view);
-
 
         ImageButton logoutButton = view.findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(v -> { //TODO set the Info for logging out

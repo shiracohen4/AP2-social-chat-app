@@ -1,7 +1,9 @@
 package com.example.myapplication.adapters;
 
 import android.content.Context;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +75,13 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     private void setPictureContact(ViewHolder viewHolder, final int position) { //if the user and its profilePic is not null set the pic in the viewHolder-imageView
         if (userViewModel.getUser(contacts.get(position).getUser().getUsername()) != null &&
                 contacts.get(position).getUser().getProfilePic() != null) {
-            viewHolder.imageView.setImageURI(Uri.parse(contacts.get(position).getUser().getProfilePic()));
+
+            String picContact = contacts.get(position).getUser().getProfilePic();
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.FROYO && picContact != "") {
+                byte[] profileImage = Base64.decode(picContact, Base64.DEFAULT);
+                Bitmap image = BitmapFactory.decodeByteArray(profileImage, 0, profileImage.length);
+                viewHolder.imageView.setImageBitmap(image);
+            }
         }
     }
 
