@@ -38,8 +38,6 @@ public class RegisterActivity extends AppCompatActivity implements Successable {
     private static final int PICK_IMAGE_REQUEST = 1;
     private RegisterVM registerViewModel;
 
-//    private RegisterRepository userRepository;
-
 
 
     @Override
