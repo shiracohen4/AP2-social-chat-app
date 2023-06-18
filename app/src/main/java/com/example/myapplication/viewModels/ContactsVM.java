@@ -30,4 +30,8 @@ public class ContactsVM extends ViewModel {
     public void add(NewContact contact) {
         contactRepository.add(contact);
     }
+
+    public void delete(Contact contact) {
+        contactRepository.delete(contact);
+    }
 }

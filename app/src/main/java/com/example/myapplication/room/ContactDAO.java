@@ -1,6 +1,7 @@
 package com.example.myapplication.room;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -17,5 +18,8 @@ public interface ContactDAO {
 
     @Query("DELETE FROM contacts")
     void clear();
+
+    @Delete
+    void delete(Contact... contacts);
 
 }

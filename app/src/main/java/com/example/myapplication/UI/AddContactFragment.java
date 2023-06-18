@@ -2,12 +2,6 @@ package com.example.myapplication.UI;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,11 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.myapplication.R;
-import com.example.myapplication.models.Contact;
-import com.example.myapplication.models.Message;
 import com.example.myapplication.models.NewContact;
-import com.example.myapplication.models.UserWithoutPass;
 import com.example.myapplication.succeable.Successable;
 import com.example.myapplication.viewModels.ContactsVM;
 
@@ -94,8 +90,6 @@ public class AddContactFragment extends Fragment implements Successable {
 
         // Pop the AddContactFragment from the back stack to remove it
         getActivity().getSupportFragmentManager().popBackStack();
-
-//        getActivity().onBackPressed();
     }
 
     @Override
@@ -110,32 +104,9 @@ public class AddContactFragment extends Fragment implements Successable {
         // Pop the AddContactFragment from the back stack to remove it
         getActivity().getSupportFragmentManager().popBackStack();
 
-//        getActivity().onBackPressed();
+
     }
 
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        // Retrieve the selected theme from SharedPreferences
-//        sharedPreferences = getSharedPreferences(THEME_PREFS_KEY, MODE_PRIVATE);
-//        int selectedTheme = sharedPreferences.getInt(SELECTED_THEME_KEY, R.style.LightTheme_MyApplication);
-//        setTheme(selectedTheme);
-//
-//        setContentView(R.layout.activity_add_contact);
-//
-//        EditText usernameInput = findViewById(R.id.usernameInput);
-//        Button addContactButton = findViewById(R.id.addContactButton);
-//        addContactButton.setOnClickListener(v->{
-//            if(usernameInput.getText().toString().equals("chica")){
-//                finish();
-//            }else{
-//                Toast.makeText(this, "contact does not exist", Toast.LENGTH_SHORT).show();
-//                usernameInput.setText("");
-//            }
-//
-//        });
 
 
     }

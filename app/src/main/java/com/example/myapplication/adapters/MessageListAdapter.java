@@ -2,7 +2,6 @@ package com.example.myapplication.adapters;
 
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +54,6 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = null;
-        Log.i("viewType", String.valueOf(viewType));
         if (viewType == 0) {
             view = this.inflater.inflate(R.layout.message_sent, viewGroup, false);
         } else {

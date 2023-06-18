@@ -10,7 +10,6 @@ import com.example.myapplication.succeable.Successable;
 import com.example.myapplication.utilities.Info;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonPrimitive;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,8 +33,6 @@ public class LoginAPI {
     }
 
     public void loginToServer(String username , String password){
-        Log.i("login_dtl",username);
-        Log.i("login_dtl",password);
         Call<String> call = webServiceAPI.logIn(new Login(username, password));
         call.enqueue(new Callback<String>(){
             @Override

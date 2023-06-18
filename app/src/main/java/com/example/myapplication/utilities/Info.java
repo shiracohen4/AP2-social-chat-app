@@ -30,4 +30,10 @@ public class Info extends Application {
                 .allowMainThreadQueries().fallbackToDestructiveMigration().build();
 
     }
+
+    public static void resetUserInformation() {
+        loggedUser = null;
+        loggerUserToken = null;
+        isLogged = false;
+    }
 }

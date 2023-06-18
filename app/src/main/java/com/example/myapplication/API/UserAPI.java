@@ -46,7 +46,6 @@ public class UserAPI {
             public void onResponse(@NonNull Call<Void> call,
                                    @NonNull Response<Void> response) {
                 if (response.isSuccessful() && response.code() == 200) {
-//                    userDao.deleteAllUsers(); //todo:Delete!!
                     userDao.insert(user);
                     successable.onSuccess();
                 }

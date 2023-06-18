@@ -1,7 +1,9 @@
 package com.example.myapplication.room;
+
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+
 import com.example.myapplication.models.User;
 
 @Dao
@@ -14,6 +16,7 @@ public interface UserDAO {
 
     @Query("DELETE FROM users")
     void deleteAllUsers();
+
 
 
 

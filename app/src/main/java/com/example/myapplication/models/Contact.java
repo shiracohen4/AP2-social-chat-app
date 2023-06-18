@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 public class Contact {
     @PrimaryKey()
     @NonNull
-    private String id; //todo:upload version from 3 -> 4
+    private String id;
     private UserWithoutPass user;
     private lastMessage lastMessage;
 
@@ -52,6 +52,6 @@ public class Contact {
                 "id='" + id + '\'' +
                 ", user ='" + user.getUsername() + '\'' +
                 ", lastMessage..'" + content
-        + '\''+'}' ; //todo:to delete getContent() cause might be null
+        + '\''+'}' ;
     }
 }
