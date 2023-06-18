@@ -3,11 +3,13 @@ package com.example.myapplication.UI;
 import static kotlin.io.ByteStreamsKt.readBytes;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.util.Base64;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,6 +39,9 @@ public class RegisterActivity extends AppCompatActivity implements Successable {
     private Button uploadImageButton;
     private static final int PICK_IMAGE_REQUEST = 1;
     private RegisterVM registerViewModel;
+    private static final String THEME_PREFS_KEY = "theme_prefs";
+    private static final String SELECTED_THEME_KEY = "selected_theme";
+    private SharedPreferences sharedPreferences;
 
 //    private RegisterRepository userRepository;
 
@@ -45,6 +50,12 @@ public class RegisterActivity extends AppCompatActivity implements Successable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Retrieve the selected theme from SharedPreferences
+        sharedPreferences = getSharedPreferences(THEME_PREFS_KEY, MODE_PRIVATE);
+        int selectedTheme = sharedPreferences.getInt(SELECTED_THEME_KEY, R.style.LightTheme_MyApplication);
+        setTheme(selectedTheme);
+
         setContentView(R.layout.activity_register);
 
         usernameEditText = findViewById(R.id.reg_et_username);
@@ -54,12 +65,20 @@ public class RegisterActivity extends AppCompatActivity implements Successable {
         imageView = findViewById(R.id.imageView);
         uploadImageButton = findViewById(R.id.uploadImage_btn);
         Button registerButton = findViewById(R.id.reg_btn);
+        Button gotoLoginButton = findViewById(R.id.gotologin_btn);
 
         uploadImageButton.setOnClickListener(v -> openFileChooser());
         registerButton.setOnClickListener(v -> validateForm());
 
         registerViewModel = new ViewModelProvider(this).get(RegisterVM.class);
         registerViewModel.setSuccessable(this);
+
+        gotoLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+            }
+        });
     }
 
     private void validateForm() {
