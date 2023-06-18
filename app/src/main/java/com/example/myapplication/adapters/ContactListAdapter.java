@@ -7,6 +7,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.R;
 import com.example.myapplication.listeners.OnItemClickListener;
 import com.example.myapplication.models.Contact;
+import com.example.myapplication.viewModels.ContactsVM;
 import com.example.myapplication.viewModels.UserVM;
 
 import java.text.SimpleDateFormat;
@@ -27,12 +29,16 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     private List<Contact> contacts;
     private OnItemClickListener listener;
     private UserVM userViewModel;
+    private ContactsVM contactsViewModel;
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView imageView;
         private final TextView displayName;
         private final TextView lastMsg;
         private final TextView time;
+        private final Button deleteButton; // Add delete button reference
+
 
         public ViewHolder(View view) {
             super(view);
@@ -40,13 +46,16 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             displayName = view.findViewById(R.id.ContactDisplayName);
             lastMsg = view.findViewById(R.id.ContactLastMessage);
             time = view.findViewById(R.id.ContactHour);
+            deleteButton = view.findViewById(R.id.deleteButton); // Initialize delete button reference
+
         }
     }
 
-    public ContactListAdapter(Context context, OnItemClickListener listener) {
+    public ContactListAdapter(ContactsVM contactsViewModel, Context context, OnItemClickListener listener) {
         this.inflater = LayoutInflater.from(context);
         this.listener = listener;
         this.userViewModel = new UserVM();
+        this.contactsViewModel =contactsViewModel;
     }
 
     @Override
@@ -68,6 +77,10 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             }
             viewHolder.itemView.setOnClickListener(view -> { //when clicking on one of the contacts it will get it and performs the lambda = open the chat with this contact
                 listener.onItemClick(contacts.get(position));
+            });
+            viewHolder.deleteButton.setOnClickListener(v -> {
+                // Call a method to delete the contact
+                contactsViewModel.delete(contacts.get(position));
             });
         }
     }

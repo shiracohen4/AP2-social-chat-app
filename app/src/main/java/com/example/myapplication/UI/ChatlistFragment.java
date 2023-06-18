@@ -87,21 +87,17 @@ public class ChatlistFragment extends Fragment {
         setAdapter();
         setContactList(view);
 
+
         ImageButton logoutButton = view.findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(v -> { //TODO set the Info for logging out
             requireActivity().finish();
         });
 
         setAddContactBtn(view);
-
-//        ImageButton button_addChat = view.findViewById(R.id.button_addChat);
-//        button_addChat.setOnClickListener(v -> {
-//            startActivity(new Intent(requireContext(), AddContactFragment.class)); //todo: change to fragment
-//        });
     }
 
     private void setAdapter() { //create the contacts adapter and the onClick listener
-        adapter = new ContactListAdapter(Info.context, contact -> { //when pressing on a contact in the recycler the chat with him will be opened
+        adapter = new ContactListAdapter(contactsViewModel, Info.context, contact -> { //when pressing on a contact in the recycler the chat with him will be opened
             Intent chatIntent = new Intent(Info.context, ChatActivity.class);
             Info.contactId = contact.getId(); //TODO:remember to change this while exit from the chat
             Log.i("contactId", String.valueOf(Info.contactId));
@@ -127,7 +123,6 @@ public class ChatlistFragment extends Fragment {
         button_addChat.setOnClickListener(v -> {
 
             Fragment fragment = new AddContactFragment();
-//            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentManager fragmentManager = getChildFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.addContactFragmentContainer, fragment);

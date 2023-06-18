@@ -63,4 +63,10 @@ public class ContactRepository {
                 "Bearer " + Info.loggerUserToken, this.contactListData);
     }
 
+    public void delete(Contact contact) {
+        contactDao.delete(contact);
+        contactListData.setValue(contactDao.getAllContacts());
+        contactApi.delete(contact);
+    }
+
 }
