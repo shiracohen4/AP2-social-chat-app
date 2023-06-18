@@ -13,15 +13,13 @@ public class Info extends Application {
     public static boolean isLogged;
     public static UserDB usersDB;
     public static String baseUrlServer;
-    public static String serverPort;
     public static String contactId;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
-        baseUrlServer = "http://10.0.2.2:";
-        serverPort = "5000";
+        baseUrlServer = "http://10.0.2.2:5000";
         context = getApplicationContext();
         loggedUser = null;
         loggerUserToken = null;
