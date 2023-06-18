@@ -72,6 +72,7 @@ public class ChatActivity extends AppCompatActivity {
 
         messagesViewModel.get().observe(this, messages -> {
             adapter.setMessageList(messages);
+            messagesListRV.scrollToPosition(messages.size()-1);
         });
 
         messagesListRV.setAdapter(adapter);
