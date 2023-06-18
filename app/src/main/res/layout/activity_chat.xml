@@ -30,7 +30,7 @@
                 android:layout_height="70dp"
                 android:src="@drawable/pic2"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/displayName"
+                app:layout_constraintEnd_toStartOf="@+id/ChatDisplayName"
                 app:layout_constraintHorizontal_bias="0.109"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
