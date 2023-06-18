@@ -5,6 +5,7 @@ import androidx.room.Room;
 
 import com.example.myapplication.API.ContactAPI;
 import com.example.myapplication.models.Contact;
+import com.example.myapplication.models.NewContact;
 import com.example.myapplication.room.AppDB;
 import com.example.myapplication.room.ContactDAO;
 import com.example.myapplication.succeable.Successable;
@@ -56,7 +57,10 @@ public class ContactRepository {
         return contactListData;
     }
 
-
     //todo : add addition methods
+    public void add(NewContact contact) {
+        this.contactApi.addContact(contact, Info.loggedUser,
+                "Bearer " + Info.loggerUserToken, this.contactListData);
+    }
 
 }

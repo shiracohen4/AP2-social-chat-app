@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.models.Contact;
+import com.example.myapplication.models.NewContact;
+import com.example.myapplication.models.User;
 import com.example.myapplication.room.ContactDAO;
 import com.example.myapplication.service.WebServiceAPI;
 import com.example.myapplication.succeable.Successable;
@@ -70,6 +72,47 @@ public class ContactAPI {
             public void onFailure(@NonNull Call<List<Contact>> call, @NonNull Throwable t) {
                 Log.i("onFailure","onfailure",t);
                 //todo
+            }
+        });
+    }
+
+    public void addContact(NewContact contact, String username, String token,
+                           MutableLiveData<List<Contact>> contacts) {
+//        Invitation invitation = new Invitation(username, contact.getId(), "localhost:5146");
+//        Retrofit contactRetrofit = new Retrofit.Builder()
+//                .baseUrl(Info.baseUrlServer + Info.serverPort + "/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        WebServiceAPI contactServerApi = contactRetrofit.create(WebServiceAPI.class);
+//        Call<Void> call = contactServerApi.postInvitation(invitation);
+        Call<Contact> call = webServiceAPI.addChat(token, contact);
+        call.enqueue(new Callback<Contact>() {
+            @Override
+            public void onResponse(@NonNull Call<Contact> call, @NonNull Response<Contact> response) {
+                if (response.isSuccessful()) {
+                    successable.onSuccess();
+                    Log.i("chat_res", response.body().toString());
+
+                    Contact res_contact = response.body();
+
+                    contactDao.insert(res_contact);
+                    List<Contact> newContacts = contacts.getValue();
+                    newContacts.add(res_contact);
+                    contacts.postValue(newContacts);
+
+                    // send after invitation, post for the contact
+//                    addToMyServer(contact, token, contacts);
+
+                } else if(successable != null){
+                    successable.onFail();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Contact> call, @NonNull Throwable t) {
+                if(successable != null) {
+                    successable.onFail();
+                }
             }
         });
     }
