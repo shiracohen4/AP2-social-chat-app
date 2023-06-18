@@ -32,8 +32,7 @@ public class MessageAPI {
     public MessageAPI(MessageDAO messageDao) {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSS").setLenient().create();
         this.retrofit = new Retrofit.Builder()
-                .baseUrl(Info.baseUrlServer +
-                        Info.serverPort + "/")
+                .baseUrl(Info.baseUrlServer + "/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         this.webServiceAPI = this.retrofit.create(WebServiceAPI.class);

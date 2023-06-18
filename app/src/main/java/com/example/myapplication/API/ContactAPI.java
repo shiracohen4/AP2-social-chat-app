@@ -33,7 +33,7 @@ public class ContactAPI {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSS").setLenient().create();
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(Info.baseUrlServer +
-                        Info.serverPort + "/")
+                         "/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         this.webServiceAPI = this.retrofit.create(WebServiceAPI.class);
