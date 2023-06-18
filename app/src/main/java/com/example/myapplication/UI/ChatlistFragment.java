@@ -90,6 +90,14 @@ public class ChatlistFragment extends Fragment {
 
         ImageButton logoutButton = view.findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(v -> { //TODO set the Info for logging out
+            // Clear any user session data or perform necessary cleanup
+            // For example, you can clear the user token or reset any relevant variables
+            // ...
+            Info.resetUserInformation();
+            // Start the login activity or navigate to the login screen
+            Intent intent = new Intent(requireActivity(), LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
             requireActivity().finish();
         });
 

@@ -65,6 +65,9 @@ public class LoginActivity extends AppCompatActivity implements Successable {
             LoginAPI loginAPI = new LoginAPI(this);
             loginAPI.loginToServer(username, password);
         });
+
+
+
     }
 
 
