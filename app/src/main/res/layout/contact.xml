@@ -7,6 +7,7 @@
     android:orientation="horizontal"
     android:padding="16dp"
     android:background="@color/my_tpink">
+<!--    android:background="?attr/contactBGContactListColor">-->
 
 
     <ImageView
@@ -34,21 +35,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Contact Name"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+            <!--                android:textColor="?attr/textColor"-->
 
             <TextView
                 android:id="@+id/ContactLastMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Last Message"
-                android:textColor="#808080"
+                android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/displayName" />
+                app:layout_constraintTop_toBottomOf="@+id/ContactDisplayName" />
+<!--            android:textColor="?attr/etHintColor"-->
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
@@ -63,9 +66,10 @@
             android:layout_height="wrap_content"
             android:text="Delete"
             android:textSize="14sp"
-            android:textColor="#808080"
+            android:textColor="@color/black"
             android:backgroundTint="@color/white"
             android:layout_marginBottom="4dp" />
+<!--        android:backgroundTint="?attr/deleteButtonColor"-->
 
         <TextView
             android:id="@+id/ContactHour"
@@ -73,7 +77,8 @@
             android:layout_height="wrap_content"
             android:text="12:34 PM"
             android:textSize="12sp"
-            android:textColor="#808080" />
+            android:textColor="@color/my_darkgrey" />
+<!--        android:textColor="?attr/etHintColor"-->
 
     </LinearLayout>
 

@@ -17,6 +17,10 @@
     <color name="my_tpink">#5EE7A4A3</color>
     <color name="my_yellow">#FDDD59</color>
     <color name="my_tyellow">#5EFDDD59</color>
-    <color name="my_lightgrey">#D8D8D8</color>
+    <color name="my_lightgrey">#838383</color>
+    <color name="my_lightergrey">#D8D8D8</color>
     <color name="my_darkgrey">#5C5C5C</color>
+    <color name="grey_bg">#383838</color>
+    <color name="my_dpink">#AF807F</color>
+
 </resources>

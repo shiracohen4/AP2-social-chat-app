@@ -1,9 +1,11 @@
 package com.example.myapplication.UI;
 
 import static android.content.Context.MODE_PRIVATE;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,14 +71,15 @@ public class AddContactFragment extends Fragment implements Successable {
         });
 
         saveContact_btn.setOnClickListener(v -> {
-            if (contactUsername != null || contactUsername.length() != 0) {
+            contactUsername = contactUsername_et.getText().toString().trim();
+            if (TextUtils.isEmpty(contactUsername)) {
+                contactUsername_et.setError("Username cannot be empty");
+            } else {
                 NewContact newContact = new NewContact(contactUsername);
                 contactsVM.add(newContact);
             }
-            else {
-                contactUsername_et.setError("Username cannot be empty");
-            }
         });
+
     }
 
     @Override
@@ -89,24 +92,17 @@ public class AddContactFragment extends Fragment implements Successable {
         addContactContainer.setVisibility(View.GONE);
 
         // Pop the AddContactFragment from the back stack to remove it
-        getActivity().getSupportFragmentManager().popBackStack();
+
+        FragmentManager fragmentManager = getParentFragmentManager();
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+            fragmentManager.popBackStack();
+        }
     }
 
     @Override
     public void onFail() {
+        contactUsername_et.setText("");
         String input = "Contact could not be added";
         Toast.makeText(getActivity(), input, Toast.LENGTH_SHORT).show();
-
-        // Hide the add contact fragment container
-        ViewGroup addContactContainer = getActivity().findViewById(R.id.addContactFragmentContainer);
-        addContactContainer.setVisibility(View.GONE);
-
-        // Pop the AddContactFragment from the back stack to remove it
-        getActivity().getSupportFragmentManager().popBackStack();
-
-
     }
-
-
-
-    }
+}

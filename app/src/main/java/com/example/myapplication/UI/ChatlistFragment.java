@@ -32,21 +32,27 @@ import com.example.myapplication.viewModels.ContactsVM;
 import com.example.myapplication.viewModels.UserVM;
 
 public class ChatlistFragment extends Fragment {
-
-    private static final String THEME_PREFS_KEY = "theme_prefs";
-    private static final String SELECTED_THEME_KEY = "selected_theme";
-    private SharedPreferences sharedPreferences;
     private View _view;
     private UserVM userViewModel;
     private ContactsVM contactsViewModel;
     private RecyclerView listView;
     private ContactListAdapter adapter;
     private ImageButton button_addChat;
+    private static final String THEME_PREFS_KEY = "theme_prefs";
+    private static final String SELECTED_THEME_KEY = "selected_theme";
+    private SharedPreferences sharedPreferences;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // Retrieve the selected theme from SharedPreferences
+        sharedPreferences = requireActivity().getSharedPreferences(THEME_PREFS_KEY, MODE_PRIVATE);
+        int selectedTheme = sharedPreferences.getInt(SELECTED_THEME_KEY, R.style.LightTheme_MyApplication);
+
+        // Set the theme for the fragment
+        requireContext().setTheme(selectedTheme);
+
         return inflater.inflate(R.layout.fragment_chatlist, container, false);
     }
 
@@ -54,12 +60,6 @@ public class ChatlistFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         _view = view;
-
-
-        sharedPreferences = requireActivity().getSharedPreferences(THEME_PREFS_KEY, MODE_PRIVATE);
-        int selectedTheme = sharedPreferences.getInt(SELECTED_THEME_KEY, R.style.LightTheme_MyApplication);
-        requireActivity().setTheme(selectedTheme);
-
 
         userViewModel = new ViewModelProvider(requireActivity()).get(UserVM.class); //userVM role: get the user details - from localdb , using userDao
         contactsViewModel = new ViewModelProvider(requireActivity()).get(ContactsVM.class); //contactsVM role: get list of all contacts locally and then when observed syncing from service
@@ -140,6 +140,14 @@ public class ChatlistFragment extends Fragment {
             ViewGroup addContactContainer = view.findViewById(R.id.addContactFragmentContainer);
             addContactContainer.bringToFront(); // Bring the container to the front
             addContactContainer.setVisibility(View.VISIBLE);
+
         });
+    }
+
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+            fragmentManager.popBackStack();
+        }
     }
 }
