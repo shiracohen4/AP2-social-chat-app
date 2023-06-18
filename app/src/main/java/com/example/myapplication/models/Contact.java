@@ -1,28 +1,31 @@
 package com.example.myapplication.models;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "contacts")
 public class Contact {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey()
+    @NonNull
+    private String id; //todo:upload version from 3 -> 4
     private UserWithoutPass user;
-    private Message lastMessage;
+    private lastMessage lastMessage;
 
 
-    public Contact(UserWithoutPass user, Message lastMessage) {
+    public Contact(String id, UserWithoutPass user, lastMessage lastMessage) {
+        this.id = id;
         this.user = user;
         this.lastMessage = lastMessage;
     }
 
     // Getters and setters for the properties
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -34,11 +37,21 @@ public class Contact {
         this.user = user;
     }
 
-    public Message getLastMessage() {
+    public lastMessage getLastMessage() {
         return lastMessage;
     }
 
-    public void setLastMessage(Message lastMessage) {
+    public void setLastMessage(lastMessage lastMessage) {
         this.lastMessage = lastMessage;
+    }
+
+    public String toString() {
+        String content = "";
+        if(lastMessage != null){content = lastMessage.getContent();};
+        return "User{" +
+                "id='" + id + '\'' +
+                ", user ='" + user.getUsername() + '\'' +
+                ", lastMessage..'" + content
+        + '\''+'}' ; //todo:to delete getContent() cause might be null
     }
 }

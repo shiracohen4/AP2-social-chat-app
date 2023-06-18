@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,7 +103,8 @@ public class ChatlistFragment extends Fragment {
     private void setAdapter() { //create the contacts adapter and the onClick listener
         adapter = new ContactListAdapter(Info.context, contact -> { //when pressing on a contact in the recycler the chat with him will be opened
             Intent chatIntent = new Intent(Info.context, ChatActivity.class);
-            Info.contactId = contact.getId();
+            Info.contactId = contact.getId(); //TODO:remember to change this while exit from the chat
+            Log.i("contactId", String.valueOf(Info.contactId));
             chatIntent.putExtra("contactUsername", contact.getUser().getUsername());
             chatIntent.putExtra("contactDisplayName", contact.getUser().getDisplayName());
             chatIntent.putExtra("contactProfilePic", contact.getUser().getProfilePic());
