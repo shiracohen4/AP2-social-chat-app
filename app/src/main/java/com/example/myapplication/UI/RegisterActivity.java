@@ -118,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity implements Successable {
     @Override
     public void onSuccess() {
         Toast.makeText(RegisterActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
-        finish(); // Finish the activity and go back to the previous screen - login screen todo: remember to update the info logged-user after logging
+        finish(); // Finish the activity and go back to the previous screen - login screen
     }
     @Override
     public void onFail() {

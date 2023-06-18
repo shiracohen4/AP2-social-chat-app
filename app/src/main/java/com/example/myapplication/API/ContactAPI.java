@@ -47,12 +47,10 @@ public class ContactAPI {
 
     public void getAllContacts(MutableLiveData<List<Contact>> contacts, String token) { //contacts=contactListData[liveData List<Contact>] of repository
         Call<List<Contact>> call = webServiceAPI.getAllContacts(token);
-        Log.i("contacts.getValue()", contacts.getValue().toString());
         call.enqueue(new Callback<List<Contact>>() {
             @Override
             public void onResponse(@NonNull Call<List<Contact>> call,
                                    @NonNull Response<List<Contact>> response) {
-                Log.i("response.body", response.body().toString());
                 new Thread(() -> {
                     contactDao.clear(); //delete all contacts records
                     if (response.body() == null) {
@@ -64,13 +62,12 @@ public class ContactAPI {
                     }
                     contacts.postValue(response.body()); //push to the repository contactListData the full contacts items
                 }).start();
-                //todo: onSuccess()?
+
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Contact>> call, @NonNull Throwable t) {
                 Log.i("onFailure", "onfailure", t);
-                //todo
             }
         });
     }
@@ -83,7 +80,6 @@ public class ContactAPI {
             public void onResponse(@NonNull Call<Contact> call, @NonNull Response<Contact> response) {
                 if (response.isSuccessful()) {
                     successable.onSuccess();
-                    Log.i("chat_res", response.body().toString());
 
                     Contact res_contact = response.body();
 

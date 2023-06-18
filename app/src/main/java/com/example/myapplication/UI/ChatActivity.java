@@ -94,5 +94,4 @@ public class ChatActivity extends AppCompatActivity {
             messagesViewModel.add(message);
         });
     }
-    //todo: on destroyed to change the contactId!!!!!!!!
 }

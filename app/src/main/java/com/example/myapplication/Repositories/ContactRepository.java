@@ -57,7 +57,6 @@ public class ContactRepository {
         return contactListData;
     }
 
-    //todo : add addition methods
     public void add(NewContact contact) {
         this.contactApi.addContact(contact, Info.loggedUser,
                 "Bearer " + Info.loggerUserToken, this.contactListData);
