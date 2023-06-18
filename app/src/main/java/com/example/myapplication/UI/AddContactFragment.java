@@ -1,14 +1,8 @@
 package com.example.myapplication.UI;
 
 import static android.content.Context.MODE_PRIVATE;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,11 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.myapplication.R;
-import com.example.myapplication.models.Contact;
-import com.example.myapplication.models.Message;
 import com.example.myapplication.models.NewContact;
-import com.example.myapplication.models.UserWithoutPass;
 import com.example.myapplication.succeable.Successable;
 import com.example.myapplication.viewModels.ContactsVM;
 
@@ -96,14 +92,11 @@ public class AddContactFragment extends Fragment implements Successable {
         addContactContainer.setVisibility(View.GONE);
 
         // Pop the AddContactFragment from the back stack to remove it
-//        getActivity().getSupportFragmentManager().popBackStack();
 
         FragmentManager fragmentManager = getParentFragmentManager();
         if (fragmentManager.getBackStackEntryCount() > 0) {
             fragmentManager.popBackStack();
         }
-
-//        getActivity().onBackPressed();
     }
 
     @Override

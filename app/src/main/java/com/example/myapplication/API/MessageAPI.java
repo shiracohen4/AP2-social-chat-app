@@ -32,8 +32,7 @@ public class MessageAPI {
     public MessageAPI(MessageDAO messageDao) {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSS").setLenient().create();
         this.retrofit = new Retrofit.Builder()
-                .baseUrl(Info.baseUrlServer +
-                        Info.serverPort + "/")
+                .baseUrl(Info.baseUrlServer + "/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         this.webServiceAPI = this.retrofit.create(WebServiceAPI.class);
@@ -88,16 +87,12 @@ public class MessageAPI {
                     newMsg.setChatId(Info.contactId);
                     messageDao.insert(newMsg);
                     List<Message> chatMsgRoom = messageDao.getChatMessages(Info.contactId);
-                    Log.i("addMessage" , chatMsgRoom.toString());
                     List<Message> newMessageList = messages.getValue();
                     newMessageList.add(newMsg);
                     messages.postValue(newMessageList);
                 }
                 else{
                     Log.i("addMessage" , "response isn't successful || status code isn't 200");
-                    Log.i("response.isSuccessful()" , String.valueOf(response.isSuccessful()));
-                    Log.i("response.code()()" , String.valueOf(response.code()));
-
 
                 }
             }

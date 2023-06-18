@@ -25,14 +25,16 @@ public class UserAPI {
     Successable successable;
 
 
-    public UserAPI(){
+    public UserAPI() {
         Gson gson = new GsonBuilder().setLenient().create();
         userDao = Info.usersDB.getUserDAO();
-        retrofit = new Retrofit.Builder().baseUrl(Info.baseUrlServer + Info.serverPort + "/") //set url
+        retrofit = new Retrofit.Builder().baseUrl(Info.baseUrlServer + "/") //set url
                 .addConverterFactory(GsonConverterFactory.create(gson)) //factory for de/serialization JSONs
                 .build(); //create retrofit instance
         webServiceAPI = retrofit.create(WebServiceAPI.class); //create server api instance with HTTP requests.
+
     }
+
     public void setSuccessable(Successable successable) {
         this.successable = successable;
     }
@@ -46,14 +48,13 @@ public class UserAPI {
             public void onResponse(@NonNull Call<Void> call,
                                    @NonNull Response<Void> response) {
                 if (response.isSuccessful() && response.code() == 200) {
-//                    userDao.deleteAllUsers(); //todo:Delete!!
                     userDao.insert(user);
                     successable.onSuccess();
-                }
-                else {
+                } else {
                     successable.onFail();
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                 successable.onFail();
@@ -66,8 +67,7 @@ public class UserAPI {
         User user;
         try {
             user = roomUsers.execute().get(); //execute:start the inBackground method. get: like await- wait for the response and don't continue until then.
-        }
-        catch (Exception exception) {
+        } catch (Exception exception) {
             user = null;
         }
         return user;
@@ -88,7 +88,6 @@ public class UserAPI {
             return userDao.getUserByUsername(username);
         }
     }
-
 
 
 }

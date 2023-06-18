@@ -21,10 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
-        android:hint="http://localhost:5000/"
+        android:hint="http://10.0.2.2:5000/"
         android:paddingStart="20dp"
         android:textColor="?attr/etColor"
         android:textColorHint="?attr/etHintColor" />
+  
     <!-- Title for theme selection -->
     <Button
         android:id="@+id/buttonConnectServer"

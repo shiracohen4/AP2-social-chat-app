@@ -1,14 +1,20 @@
 package com.example.myapplication.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myapplication.R;
+import com.example.myapplication.utilities.Info;
 
 public class SettingActivity extends AppCompatActivity {
     private RadioGroup radioGroupTheme;
@@ -30,15 +36,23 @@ public class SettingActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_setting);
 
-        EditText editTextServerAddress = findViewById(R.id.editTextServerAddress);
         radioGroupTheme = findViewById(R.id.radioGroupTheme);
         buttonSaveSettings = findViewById(R.id.buttonSaveSettings);
         buttonSaveSettings.setOnClickListener(v -> {
             applyTheme();
         });
 
+        EditText editTextServerAddress = findViewById(R.id.editTextServerAddress);
         buttonConnectServer = findViewById(R.id.buttonConnectServer);
         buttonConnectServer.setOnClickListener(v -> {
+            String serverAddress = editTextServerAddress.getText().toString().trim();
+            // Save the server ID and port in the Info class
+            Info.baseUrlServer = serverAddress;
+            Log.i("Tag","server address successfully changed!");
+
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
     }
 

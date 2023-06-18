@@ -43,8 +43,6 @@ public class RegisterActivity extends AppCompatActivity implements Successable {
     private static final String SELECTED_THEME_KEY = "selected_theme";
     private SharedPreferences sharedPreferences;
 
-//    private RegisterRepository userRepository;
-
 
 
     @Override
@@ -137,7 +135,7 @@ public class RegisterActivity extends AppCompatActivity implements Successable {
     @Override
     public void onSuccess() {
         Toast.makeText(RegisterActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
-        finish(); // Finish the activity and go back to the previous screen - login screen todo: remember to update the info logged-user after logging
+        finish(); // Finish the activity and go back to the previous screen - login screen
     }
     @Override
     public void onFail() {

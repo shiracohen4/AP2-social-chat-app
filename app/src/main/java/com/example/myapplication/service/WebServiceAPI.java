@@ -3,8 +3,8 @@ package com.example.myapplication.service;
 import com.example.myapplication.models.AddMessageResponse;
 import com.example.myapplication.models.Contact;
 import com.example.myapplication.models.Login;
-import com.example.myapplication.models.NewContact;
 import com.example.myapplication.models.Message;
+import com.example.myapplication.models.NewContact;
 import com.example.myapplication.models.SendMsg;
 import com.example.myapplication.models.User;
 
@@ -12,6 +12,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -36,4 +37,9 @@ public interface WebServiceAPI {
     @POST("/api/Chats/{id}/Messages")
     Call<AddMessageResponse> postMessage(@Path("id") String id, @Body SendMsg message,
                                          @Header("authorization") String auth);
+
+
+    @DELETE("/api/Chats/{id}")
+    Call<Void> deleteContact(@Header("Authorization") String token, @Path("id") String contactId);
+
 }
