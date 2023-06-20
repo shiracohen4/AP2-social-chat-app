@@ -32,7 +32,7 @@ To set up and run the Yesh-Chat Android Application, follow these steps:
 
 2. **Clone the Repository**: Clone the project repository to your local machine.
 
-3. **Set up the Server**: Navigate to the server directory within the project by running `cd server` and install the required dependencies by running `npm install`. Start the server by running `npm start`. Please insure the MongoDB is active and running for allowing the server to establish a connection.
+3. **Set up the Server**: Navigate to the server directory within the project by running `cd server` and install the required dependencies by running `npm install`. Start the server by running `npm start`. Please insure MongoDB is active and running for allowing the server to establish a connection.
 
 4. **Build and Run**: Open the Android project in Android Studio and build the application. Run the application on your Android device or emulator.
 
