@@ -1,6 +1,6 @@
 # Yesh-Chat Android Application
 
-Welcome to Yesh-Chat!
+Welcome to Yesh-Chat!<br>
 This project is a messaging application developed using Android Studio, with a server-side implementation in Node.js. The application allows users to register, log in, add contacts, and send messages.<br>
 Our Android application serves as an extension of our website, providing users with a seamless mobile experience.
 
