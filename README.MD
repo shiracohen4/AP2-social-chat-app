@@ -56,10 +56,10 @@ The Yesh-Chat Android Application utilizes the following technologies:
 
 Here are some GIFs showcasing the activities of the WhatsApp Android Application:
 
-![Registration Activity](/path/to/registration.gif)
+![Registration Activity](gifs/register.gif)
 *Registration Activity*
 
-![Chat Activity](/path/to/chat.gif)
+![Chat Activity](gifs/login_and_chat.gif)
 *Chat Activity*
 
 Thank you for using the Yesh-Chat Android Application! We hope you enjoy the messaging experience it offers.
