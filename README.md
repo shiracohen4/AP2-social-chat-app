@@ -62,4 +62,10 @@ Here are some screenshots showcasing the Yesh-Chat Web Application:
 ![Chats Page](screenshots/chats.png) 
 *Chats Page*
 
-Thank you for using the Yesh-Chat Web Application! We hope you enjoy the messaging experience it offers.
+Thank you for using the Yesh-Chat Web Application! We hope you enjoy the messaging experience it offers. <br><br>
+
+Credits:
+
+[Yeela Granot](https://github.com/yeela8g)
+
+[Shira Cohen](https://github.com/shiracohen4)
