@@ -64,4 +64,10 @@ Here are some GIFs showcasing the activities of the WhatsApp Android Application
 <br>
 *Chat Activity*
 
-Thank you for using the Yesh-Chat Android Application! We hope you enjoy the messaging experience it offers.
+Thank you for using the Yesh-Chat Android Application! We hope you enjoy the messaging experience it offers. <br><br>
+
+Credits:
+
+[Yeela Granot](https://github.com/yeela8g)
+
+[Shira Cohen](https://github.com/shiracohen4)
